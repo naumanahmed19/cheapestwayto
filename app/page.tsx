@@ -17,7 +17,9 @@ export const metadata = createMetadata({
     "shipping cost comparison",
     "cheapest way to ship",
     "saving money guides"
-  ]
+  ],
+  image: guides[0]?.image,
+  imageAlt: `${siteConfig.name} cost comparison guide`
 });
 
 export default function Home() {
@@ -81,7 +83,7 @@ export default function Home() {
                 <div className="relative h-72 sm:h-96">
                   <Image
                     src={featuredGuide.image}
-                    alt=""
+                    alt={featuredGuide.h1}
                     fill
                     priority
                     sizes="(min-width: 1024px) 60vw, 100vw"
@@ -144,8 +146,8 @@ export default function Home() {
               Pick a cost area, then narrow into a guide with a direct comparison table and practical next steps.
             </p>
           </div>
-          <Link href="/sitemap.xml" className="text-sm font-semibold text-zinc-950 hover:underline">
-            XML sitemap
+          <Link href="/cheapest-way-to" className="text-sm font-semibold text-zinc-950 hover:underline">
+            All guides
           </Link>
         </div>
         <div className="no-scrollbar mt-6 flex gap-5 overflow-x-auto pb-2 lg:grid lg:grid-cols-4 lg:overflow-visible">
@@ -160,7 +162,7 @@ export default function Home() {
                 <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-zinc-100">
                   <Image
                     src={category.image}
-                    alt=""
+                    alt={`${category.name} cost comparison`}
                     fill
                     sizes="(min-width: 1024px) 25vw, 75vw"
                     className="object-cover transition duration-500 group-hover:scale-105"

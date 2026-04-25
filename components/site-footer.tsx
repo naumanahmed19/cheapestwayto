@@ -12,6 +12,18 @@ export function SiteFooter() {
           </p>
         </div>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <Link href="/cheapest-way-to" className="text-sm font-semibold text-zinc-950 hover:underline">
+            All guides
+          </Link>
+          <Link href="/search" className="text-sm font-semibold text-zinc-950 hover:underline">
+            Search
+          </Link>
+          <Link href="/about" className="text-sm font-semibold text-zinc-950 hover:underline">
+            About
+          </Link>
+          <Link href="/editorial-policy" className="text-sm font-semibold text-zinc-950 hover:underline">
+            Editorial policy
+          </Link>
           {categories.slice(0, 8).map((category) => (
             <Link key={category.slug} href={`/category/${category.slug}`} className="text-sm hover:text-zinc-950">
               {category.name}

@@ -66,6 +66,23 @@ export type Guide = {
   }[];
 };
 
+export type GuideDetailContent = {
+  quoteChecklist: string[];
+  hiddenFees: string[];
+  examples: {
+    title: string;
+    situation: string;
+    compare: string;
+    likelyCheapest: string;
+    note: string;
+  }[];
+  confidence: {
+    label: string;
+    note: string;
+    missingData: string[];
+  };
+};
+
 export const categories: Category[] = [
   {
     slug: "shipping-moving",
@@ -1537,6 +1554,489 @@ export const guides: Guide[] = [
   }
 ];
 
+export const guideDetailContent: Record<string, GuideDetailContent> = {
+  "ship-clothes": {
+    quoteChecklist: [
+      "Origin and destination ZIP codes.",
+      "Packed weight for each mailer or box.",
+      "Length, width, and height after packing.",
+      "Whether clothes can go in a poly mailer or need a box.",
+      "Delivery deadline and whether tracking or insurance matters."
+    ],
+    hiddenFees: [
+      "Dimensional weight on large, light boxes.",
+      "Nonstandard package surcharges.",
+      "Label printing or pickup fees.",
+      "Insurance above the included amount.",
+      "Airline overweight fees if using checked luggage."
+    ],
+    examples: [
+      {
+        title: "One small bundle",
+        situation: "A few shirts or jeans under about 5 lb in a soft mailer.",
+        compare: "USPS Ground Advantage, one discounted UPS/FedEx label, and flat rate only if dense.",
+        likelyCheapest: "Discounted USPS in a poly mailer.",
+        note: "The big savings move is using the smallest safe package, not picking a famous carrier."
+      },
+      {
+        title: "Heavy moving box",
+        situation: "A box with coats, shoes, denim, or multiple outfits.",
+        compare: "Discounted UPS/FedEx labels against USPS flat rate and regular USPS package pricing.",
+        likelyCheapest: "Discounted parcel label, but only after dimensions are measured.",
+        note: "Flat rate helps only when the box is dense and completely filled."
+      },
+      {
+        title: "Moving while flying",
+        situation: "You are traveling to the same place and can carry a bag.",
+        compare: "Extra checked bag fee against shipping the same clothes in a box.",
+        likelyCheapest: "Checked luggage if it stays under airline limits.",
+        note: "Overweight baggage fees can quickly erase the win."
+      }
+    ],
+    confidence: {
+      label: "Good for choosing what to compare first",
+      note: "Carrier prices change by ZIP code, package dimensions, and online discount level, so this page should guide the order of comparison rather than replace a live quote.",
+      missingData: [
+        "Exact ZIP-to-ZIP carrier quotes.",
+        "Current third-party postage discounts.",
+        "Your final box dimensions after packing."
+      ]
+    }
+  },
+  "ship-boxes-across-country": {
+    quoteChecklist: [
+      "Total number of boxes.",
+      "Packed weight and dimensions for each box.",
+      "Pickup and delivery ZIP codes.",
+      "Whether stairs, elevators, or parking limits affect pickup.",
+      "Delivery deadline and storage needs."
+    ],
+    hiddenFees: [
+      "Oversize or dimensional-weight charges.",
+      "Moving container delivery, storage, or parking permit fees.",
+      "Residential pickup or liftgate fees for freight-like services.",
+      "Insurance or declared value coverage.",
+      "Replacing boxes damaged by overpacking."
+    ],
+    examples: [
+      {
+        title: "Three college boxes",
+        situation: "A few boxes with clothes, bedding, and small room items.",
+        compare: "Discounted parcel labels from USPS, UPS, and FedEx.",
+        likelyCheapest: "Parcel labels.",
+        note: "A container or moving company usually has too much minimum cost for this size."
+      },
+      {
+        title: "Apartment without furniture",
+        situation: "Many boxes, but no couch, bed, or large furniture.",
+        compare: "Full parcel total against a small moving container quote.",
+        likelyCheapest: "Depends on box count and access.",
+        note: "Once the shipment grows, convenience and pickup logistics can become part of the real cost."
+      },
+      {
+        title: "Boxes plus a flight",
+        situation: "You are flying and can take some soft goods with you.",
+        compare: "Checked bags for clothes against parcel shipping for remaining boxes.",
+        likelyCheapest: "A mix of checked bags and parcel labels.",
+        note: "Keep fragile or essential items out of checked luggage."
+      }
+    ],
+    confidence: {
+      label: "Useful for small-move planning",
+      note: "The cheapest option changes sharply once boxes become oversized or numerous. Treat the advice as a sorting tool, then price the exact shipment.",
+      missingData: [
+        "Actual box count after decluttering.",
+        "Pickup access and parking constraints.",
+        "Container availability for your route."
+      ]
+    }
+  },
+  "send-luggage": {
+    quoteChecklist: [
+      "Bag weight and outside dimensions.",
+      "Whether you are flying on the same route.",
+      "Airline baggage allowance for your fare.",
+      "Pickup/drop-off needs and delivery deadline.",
+      "Whether the suitcase must be boxed for shipping."
+    ],
+    hiddenFees: [
+      "Airline overweight and oversize baggage fees.",
+      "Door-to-door pickup fees.",
+      "Residential delivery or remote-area fees.",
+      "Insurance above basic coverage.",
+      "Packaging costs if the bag must be boxed."
+    ],
+    examples: [
+      {
+        title: "One normal suitcase and you are flying",
+        situation: "A suitcase under airline weight limits on the same trip.",
+        compare: "Extra checked bag fee against luggage shipping.",
+        likelyCheapest: "Checked luggage.",
+        note: "This changes if your fare already includes bags or if the suitcase is overweight."
+      },
+      {
+        title: "Suitcase without you traveling",
+        situation: "The bag needs to reach someone else or arrive ahead of you.",
+        compare: "Boxed parcel shipping against luggage shipping services.",
+        likelyCheapest: "Often boxed parcel shipping, if drop-off is practical.",
+        note: "Specialty luggage shippers may still be worth it for pickup and simpler handling."
+      },
+      {
+        title: "Golf clubs, skis, or specialty gear",
+        situation: "Awkward luggage where damage or timing matters.",
+        compare: "Airline sports equipment fee, specialty shipper, and carrier quote.",
+        likelyCheapest: "Varies by route and item size.",
+        note: "For expensive gear, protection and claim rules matter as much as the cheapest label."
+      }
+    ],
+    confidence: {
+      label: "Strong for deciding check vs ship",
+      note: "This guide is most useful when it helps users compare the right categories. Final prices depend on airline fare rules, bag size, route, and pickup needs.",
+      missingData: [
+        "Your airline and fare class.",
+        "Final bag weight and dimensions.",
+        "Whether shipping services require boxing."
+      ]
+    }
+  },
+  "replace-car-keys": {
+    quoteChecklist: [
+      "Vehicle year, make, model, and VIN.",
+      "Whether you still have one working key.",
+      "Key type: metal, transponder, remote fob, or smart key.",
+      "Proof of ownership and vehicle location.",
+      "Whether roadside assistance, warranty, or insurance includes key replacement."
+    ],
+    hiddenFees: [
+      "Programming fees separate from the key blank.",
+      "Mobile locksmith trip fees.",
+      "After-hours emergency pricing.",
+      "Towing to a dealership.",
+      "Emergency blade cutting for smart fobs."
+    ],
+    examples: [
+      {
+        title: "Older car with a spare",
+        situation: "You have one working basic key and want another.",
+        compare: "Hardware store, locksmith, and dealer only if the key has a chip.",
+        likelyCheapest: "Hardware store or local locksmith.",
+        note: "Always test the copy before leaving."
+      },
+      {
+        title: "Lost all keys",
+        situation: "The car cannot start and no spare exists.",
+        compare: "Automotive locksmith with programming against dealer plus towing.",
+        likelyCheapest: "Automotive locksmith if they support the vehicle.",
+        note: "Dealer can still win for some newer or restricted smart-key systems."
+      },
+      {
+        title: "Smart key replacement",
+        situation: "Push-button start or proximity fob.",
+        compare: "Dealer, automotive locksmith, and compatible new fob.",
+        likelyCheapest: "Locksmith plus compatible fob, when supported.",
+        note: "Used fobs can be locked to another car, so compatibility matters."
+      }
+    ],
+    confidence: {
+      label: "Good for avoiding expensive paths",
+      note: "The guide can prevent common overpaying, but vehicle-specific programming rules are the deciding factor.",
+      missingData: [
+        "Exact key type and part number.",
+        "Local locksmith availability.",
+        "Whether the car requires dealer-only programming."
+      ]
+    }
+  },
+  "heat-a-house": {
+    quoteChecklist: [
+      "Heating fuel type and current utility rate.",
+      "Average monthly heating cost in winter.",
+      "Home size, insulation condition, and draft problems.",
+      "Rooms used most often and occupancy schedule.",
+      "Available utility rebates, tax credits, or audit programs."
+    ],
+    hiddenFees: [
+      "Electrical upgrades for heat pumps or space heating.",
+      "Permits and contractor labor.",
+      "Maintenance neglected on existing equipment.",
+      "Moisture or ventilation fixes after heavy air sealing.",
+      "Comfort cost from overly aggressive thermostat setbacks."
+    ],
+    examples: [
+      {
+        title: "High bill but house is comfortable",
+        situation: "The system works, but winter bills are too high.",
+        compare: "Thermostat schedule, air sealing, insulation, and utility rate options.",
+        likelyCheapest: "Behavior changes and sealing obvious drafts first.",
+        note: "Do the cheap loss-reduction steps before buying equipment."
+      },
+      {
+        title: "One room is cold",
+        situation: "Most rooms are fine, but one office or bedroom needs heat.",
+        compare: "Draft fixes, vent checks, safe space heater, or ductless mini-split.",
+        likelyCheapest: "Draft fixes plus targeted room heating.",
+        note: "A cold room can signal duct or insulation problems, so do not only mask it."
+      },
+      {
+        title: "Long-term upgrade",
+        situation: "You own the home and plan to stay.",
+        compare: "Energy audit, air sealing, insulation, and heat pump quotes.",
+        likelyCheapest: "Depends on rebates and fuel prices.",
+        note: "The right order is usually audit, seal, insulate, then size equipment."
+      }
+    ],
+    confidence: {
+      label: "Good for sequencing projects",
+      note: "Heating advice is very home-specific, so the strongest value here is showing the order of operations and what to price before a major upgrade.",
+      missingData: [
+        "Local fuel and electric rates.",
+        "Air leakage and insulation levels.",
+        "Current HVAC condition and rebate eligibility."
+      ]
+    }
+  },
+  "book-hotels": {
+    quoteChecklist: [
+      "Exact dates and whether they can move.",
+      "Required neighborhood or commute distance.",
+      "Total stay price including taxes and mandatory fees.",
+      "Cancellation deadline and prepaid terms.",
+      "Parking, resort, breakfast, pet, and Wi-Fi costs."
+    ],
+    hiddenFees: [
+      "Resort or destination fees.",
+      "Parking charges.",
+      "Pet fees and deposits.",
+      "Breakfast or Wi-Fi charges at some properties.",
+      "Higher cost from nonrefundable changes."
+    ],
+    examples: [
+      {
+        title: "Flexible weekend trip",
+        situation: "You can move the stay by a day or two.",
+        compare: "Flexible-date search, map view, and hotel direct rate.",
+        likelyCheapest: "Flexible-date booking after checking direct.",
+        note: "Changing dates often saves more than a promo code."
+      },
+      {
+        title: "Fixed event dates",
+        situation: "You need a room near a venue on specific dates.",
+        compare: "Total price, parking, cancellation terms, and commute cost.",
+        likelyCheapest: "The lowest all-in total, not always the lowest nightly rate.",
+        note: "A cheaper hotel far away can lose once transport and time are included."
+      },
+      {
+        title: "Last-minute stay",
+        situation: "You need a room soon and can accept some uncertainty.",
+        compare: "Direct rates, last-minute apps, and opaque deals.",
+        likelyCheapest: "Last-minute deal when location risk is acceptable.",
+        note: "Avoid prepaid bookings if your arrival time or plans are unstable."
+      }
+    ],
+    confidence: {
+      label: "Strong for avoiding fee traps",
+      note: "Hotel pricing changes constantly, so the page should push users toward all-in price comparison and flexible-date checks.",
+      missingData: [
+        "Live room inventory.",
+        "Local event demand.",
+        "User-specific loyalty benefits."
+      ]
+    }
+  },
+  "file-taxes": {
+    quoteChecklist: [
+      "Tax year, filing status, and adjusted gross income.",
+      "State or multiple-state filing needs.",
+      "W-2, 1099, business, investment, rental, and credit forms.",
+      "Prior-year AGI or signing PIN for e-file.",
+      "Whether you qualify for IRS Free File, VITA/TCE, or MilTax."
+    ],
+    hiddenFees: [
+      "State filing fees on top of free federal filing.",
+      "Paid upgrades for self-employment, investments, or rental forms.",
+      "Live-help add-ons.",
+      "Amended return fees.",
+      "Tax-preparer fees not quoted upfront."
+    ],
+    examples: [
+      {
+        title: "Simple W-2 return",
+        situation: "One state, W-2 income, standard deduction, no complicated credits.",
+        compare: "IRS Free File and free software tiers.",
+        likelyCheapest: "Free filing option if eligible.",
+        note: "Confirm state filing cost before entering everything."
+      },
+      {
+        title: "Self-employment income",
+        situation: "1099 work, expenses, or side business income.",
+        compare: "Paid software tier against a qualified preparer.",
+        likelyCheapest: "Depends on record quality and comfort level.",
+        note: "A paid preparer can be cheaper than fixing mistakes if records are messy."
+      },
+      {
+        title: "Tax notice or prior-year issue",
+        situation: "You received a notice or need to correct a previous return.",
+        compare: "Qualified preparer, enrolled agent, or tax clinic help.",
+        likelyCheapest: "Qualified help scoped to the issue.",
+        note: "Do not choose only by lowest prep fee when penalties or notices are involved."
+      }
+    ],
+    confidence: {
+      label: "Good, but eligibility must be verified",
+      note: "Tax software offers and IRS thresholds change by filing season. Use this page to pick a route, then verify eligibility on IRS.gov or with the provider.",
+      missingData: [
+        "Current-year eligibility rules.",
+        "Exact forms required by the return.",
+        "State filing cost and support."
+      ]
+    }
+  },
+  "start-an-llc": {
+    quoteChecklist: [
+      "State where the business actually operates.",
+      "Number of owners and ownership split.",
+      "Registered agent address and privacy needs.",
+      "State filing fee, annual report, and franchise tax rules.",
+      "Business licenses, permits, tax IDs, and local registration needs."
+    ],
+    hiddenFees: [
+      "Registered-agent renewal after a free first year.",
+      "Annual reports or franchise taxes.",
+      "Compliance packages selected by default.",
+      "Foreign qualification in states where you operate.",
+      "Operating agreement or professional advice for multiple owners."
+    ],
+    examples: [
+      {
+        title: "One-owner local service",
+        situation: "Simple business operating in one state.",
+        compare: "DIY state filing against a basic formation service.",
+        likelyCheapest: "DIY state filing.",
+        note: "The state fee is usually unavoidable; most add-ons are optional."
+      },
+      {
+        title: "Privacy concern",
+        situation: "You do not want your home address listed publicly.",
+        compare: "Registered agent service, business address options, and state disclosure rules.",
+        likelyCheapest: "Lowest recurring agent/address option that meets the privacy need.",
+        note: "First-year discounts matter less than renewal pricing."
+      },
+      {
+        title: "Two or more owners",
+        situation: "Partners, different contributions, or shared decision-making.",
+        compare: "DIY filing plus operating agreement help against attorney/accountant advice.",
+        likelyCheapest: "Professional help for the agreement, DIY or simple filing for formation.",
+        note: "A weak agreement can be much more expensive than the filing fee."
+      }
+    ],
+    confidence: {
+      label: "Strong for avoiding add-ons",
+      note: "Formation costs are state-specific, but the common savings pattern is clear: understand unavoidable state costs and avoid bundled recurring services you do not need.",
+      missingData: [
+        "Current state fee schedule.",
+        "Annual compliance requirements.",
+        "Owner agreement and tax details."
+      ]
+    }
+  },
+  "learn-coding": {
+    quoteChecklist: [
+      "Goal: hobby, job switch, automation, or school support.",
+      "Weekly hours available for practice.",
+      "Preferred language or career direction.",
+      "Need for feedback, deadlines, and job support.",
+      "Refund, financing, and outcome details for paid programs."
+    ],
+    hiddenFees: [
+      "Bootcamp financing or income-share terms.",
+      "Paid certificates that do not improve outcomes.",
+      "Subscription courses that continue after you stop using them.",
+      "Laptop, software, or exam costs.",
+      "Opportunity cost from quitting work for full-time study."
+    ],
+    examples: [
+      {
+        title: "Testing interest",
+        situation: "You are curious but not sure you like programming.",
+        compare: "Free curriculum, documentation, and tiny projects.",
+        likelyCheapest: "Free structured course.",
+        note: "Do not pay until you know you can tolerate debugging."
+      },
+      {
+        title: "Needs accountability",
+        situation: "Self-study is not sticking.",
+        compare: "Community college, low-cost cohort, mentor sessions, and bootcamp.",
+        likelyCheapest: "Low-cost class or targeted mentorship.",
+        note: "Pay for feedback and deadlines, not just more videos."
+      },
+      {
+        title: "Career switch",
+        situation: "You want a portfolio and job support.",
+        compare: "Bootcamp outcomes, local hiring market, financing, and portfolio requirements.",
+        likelyCheapest: "Free plus projects first, paid program only after proof of fit.",
+        note: "Talk to recent graduates before signing financing."
+      }
+    ],
+    confidence: {
+      label: "Good for choosing a learning investment",
+      note: "The cheapest path depends on motivation and feedback needs more than content availability, because plenty of good beginner material is free.",
+      missingData: [
+        "User's target role.",
+        "Local job market and credential value.",
+        "Actual weekly practice time."
+      ]
+    }
+  },
+  "start-a-cleaning-business": {
+    quoteChecklist: [
+      "Service type: residential, move-out, vacation rental, or commercial.",
+      "Required supplies for the first narrow service package.",
+      "Transportation radius and travel time.",
+      "Local license, DBA, insurance, and bonding requirements.",
+      "Customer acquisition plan and expected close rate."
+    ],
+    hiddenFees: [
+      "Paid leads before pricing is proven.",
+      "Insurance, bonding, and licensing.",
+      "Specialty chemicals or equipment for jobs outside your core package.",
+      "Fuel, parking, and travel time.",
+      "Payment processing and booking software."
+    ],
+    examples: [
+      {
+        title: "Residential first jobs",
+        situation: "You want first customers with a small budget.",
+        compare: "Direct outreach, referrals, local groups, and basic flyers.",
+        likelyCheapest: "Direct outreach and referrals.",
+        note: "A clear scope prevents low-price jobs from expanding."
+      },
+      {
+        title: "Move-out cleaning",
+        situation: "Bigger one-time jobs with deeper cleaning needs.",
+        compare: "Supplies, time estimate, disposal needs, and local competitors.",
+        likelyCheapest: "Lean supply kit plus careful scope.",
+        note: "Quote by scope and condition, not only room count."
+      },
+      {
+        title: "Small office clients",
+        situation: "Recurring commercial work.",
+        compare: "Insurance, after-hours access, supplies, and contract terms.",
+        likelyCheapest: "Basic compliance plus targeted local outreach.",
+        note: "Recurring work is valuable, but reliability requirements are higher."
+      }
+    ],
+    confidence: {
+      label: "Good for lean startup planning",
+      note: "This page is strongest as a spending-control checklist. Actual startup cost depends on local rules, insurance quotes, and how quickly customers convert.",
+      missingData: [
+        "Local licensing requirements.",
+        "Insurance quote for services offered.",
+        "Customer acquisition cost and close rate."
+      ]
+    }
+  }
+};
+
 export const keywordBacklog = [
   "cheapest way to ship a bike",
   "cheapest way to ship shoes",
@@ -1553,12 +2053,39 @@ export const keywordBacklog = [
   "cheapest way to print flyers"
 ];
 
+export function normalizeSearchTerm(term: string) {
+  const trimmed = term.trim();
+  if (!trimmed) return "";
+  return trimmed.toLowerCase().startsWith("cheapest way to ") ? trimmed : `cheapest way to ${trimmed}`;
+}
+
+export function topicToGuideSlug(topic: string) {
+  return normalizeSearchTerm(topic)
+    .replace(/^cheapest way to /i, "")
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+export function getTopicHref(topic: string) {
+  const slug = topicToGuideSlug(topic);
+  const publishedGuide = getGuide(slug);
+  if (publishedGuide) return `/cheapest-way-to/${publishedGuide.slug}`;
+
+  return `/search?q=${encodeURIComponent(normalizeSearchTerm(topic))}`;
+}
+
 export function getCategory(slug: string) {
   return categories.find((category) => category.slug === slug);
 }
 
 export function getGuide(slug: string) {
   return guides.find((guide) => guide.slug === slug);
+}
+
+export function getGuideDetailContent(slug: string) {
+  return guideDetailContent[slug];
 }
 
 export function getGuidesByCategory(categorySlug: string) {

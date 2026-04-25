@@ -12,7 +12,7 @@ export function GuideCard({ guide, priority = false }: { guide: Guide; priority?
       <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-zinc-100">
         <Image
           src={guide.image}
-          alt=""
+          alt={guide.h1}
           fill
           sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
           priority={priority}

@@ -7,10 +7,24 @@ type SeoInput = {
   description: string;
   path?: string;
   keywords?: string[];
+  image?: string;
+  imageAlt?: string;
+  type?: "website" | "article";
 };
 
-export function createMetadata({ title, description, path = "/", keywords }: SeoInput): Metadata {
+export function createMetadata({
+  title,
+  description,
+  path = "/",
+  keywords,
+  image,
+  imageAlt,
+  type = "website"
+}: SeoInput): Metadata {
   const url = absoluteUrl(path);
+  const socialImage = image || absoluteUrl("/opengraph-image");
+  const socialImageAlt = imageAlt || title;
+
   return {
     title,
     description,
@@ -23,12 +37,19 @@ export function createMetadata({ title, description, path = "/", keywords }: Seo
       description,
       url,
       siteName: siteConfig.name,
-      type: "website"
+      type,
+      images: [
+        {
+          url: socialImage,
+          alt: socialImageAlt
+        }
+      ]
     },
     twitter: {
       card: "summary_large_image",
       title,
-      description
+      description,
+      images: [socialImage]
     }
   };
 }

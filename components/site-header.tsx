@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { CircleDollarSign, Menu, Search } from "lucide-react";
+import { CircleDollarSign, Search } from "lucide-react";
 import { categories } from "@/data/site-content";
 
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-zinc-200 bg-white/95 backdrop-blur">
-      <div className="mx-auto grid h-20 max-w-7xl grid-cols-[auto_1fr_auto] items-center gap-4 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto grid h-20 max-w-7xl grid-cols-[auto_1fr] items-center gap-4 px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2 text-lg font-semibold tracking-tight text-zinc-950">
           <span className="flex size-9 items-center justify-center rounded-full bg-[#ff385c] text-white">
             <CircleDollarSign className="size-5" />
@@ -30,21 +30,6 @@ export function SiteHeader() {
               </span>
             </Link>
           </nav>
-        </div>
-        <div className="flex items-center justify-end gap-2">
-          <Link
-            href="/#guides"
-            className="hidden rounded-full px-4 py-2 text-sm font-semibold text-zinc-800 hover:bg-zinc-100 md:inline-flex"
-          >
-            Start comparing
-          </Link>
-          <Link
-            href="/sitemap.xml"
-            aria-label="Open sitemap"
-            className="flex size-10 items-center justify-center rounded-full border border-zinc-200 bg-white text-zinc-800 shadow-sm hover:shadow-md"
-          >
-            <Menu className="size-5" />
-          </Link>
         </div>
       </div>
     </header>

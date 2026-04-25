@@ -8,14 +8,18 @@ import {
   ClipboardCheck,
   Clock3,
   ExternalLink,
+  FileSearch,
   Gauge,
+  Info,
   Layers3,
+  ListChecks,
+  ReceiptText,
   ShieldCheck,
   TriangleAlert
 } from "lucide-react";
 import { ClothesShippingEstimator } from "@/components/cost-estimator";
 import { GuideDecisionTool } from "@/components/guide-decision-tool";
-import { categories, getCategory, getGuide, guides } from "@/data/site-content";
+import { categories, getCategory, getGuide, getGuideDetailContent, guides } from "@/data/site-content";
 import { createMetadata, jsonLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
@@ -36,7 +40,10 @@ export async function generateMetadata({ params }: PageProps) {
     title: guide.title,
     description: guide.description,
     path: `/cheapest-way-to/${guide.slug}`,
-    keywords: [guide.primaryKeyword, ...guide.secondaryKeywords]
+    keywords: [guide.primaryKeyword, ...guide.secondaryKeywords],
+    image: guide.image,
+    imageAlt: guide.h1,
+    type: "article"
   });
 }
 
@@ -46,19 +53,31 @@ export default async function GuidePage({ params }: PageProps) {
   if (!guide) notFound();
 
   const category = getCategory(guide.category);
+  const detailContent = getGuideDetailContent(guide.slug);
+  const relatedGuides = guides
+    .filter((candidate) => candidate.category === guide.category && candidate.slug !== guide.slug)
+    .slice(0, 3);
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: guide.title,
     description: guide.description,
+    image: [guide.image],
+    url: `${siteConfig.url}/cheapest-way-to/${guide.slug}`,
+    datePublished: guide.updated,
     dateModified: guide.updated,
     author: {
       "@type": "Organization",
-      name: siteConfig.name
+      name: siteConfig.name,
+      url: siteConfig.url
     },
     publisher: {
       "@type": "Organization",
-      name: siteConfig.name
+      name: siteConfig.name,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteConfig.url}/icon`
+      }
     },
     mainEntityOfPage: `${siteConfig.url}/cheapest-way-to/${guide.slug}`
   };
@@ -74,11 +93,52 @@ export default async function GuidePage({ params }: PageProps) {
       }
     }))
   };
+  const breadcrumbData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteConfig.url
+      },
+      ...(category
+        ? [
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: category.name,
+              item: `${siteConfig.url}/category/${category.slug}`
+            }
+          ]
+        : []),
+      {
+        "@type": "ListItem",
+        position: category ? 3 : 2,
+        name: guide.h1,
+        item: `${siteConfig.url}/cheapest-way-to/${guide.slug}`
+      }
+    ]
+  };
+  const optionListData = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: `${guide.h1} options`,
+    itemListElement: guide.options.map((option, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: option.name,
+      description: `${option.cost}. Best for: ${option.bestFor}. Watch out for: ${option.watchOut}.`
+    }))
+  };
 
   return (
     <main className="bg-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(structuredData)} />
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(faqData)} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(breadcrumbData)} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(optionListData)} />
       <article>
         <section className="border-b border-zinc-200 bg-white">
           <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8 lg:py-14">
@@ -113,7 +173,7 @@ export default async function GuidePage({ params }: PageProps) {
             <div className="relative min-h-80 overflow-hidden rounded-lg bg-zinc-100 lg:min-h-[460px]">
               <Image
                 src={guide.image}
-                alt=""
+                alt={guide.h1}
                 fill
                 priority
                 sizes="(min-width: 1024px) 55vw, 100vw"
@@ -173,6 +233,102 @@ export default async function GuidePage({ params }: PageProps) {
                 </table>
               </div>
             </section>
+
+            {detailContent ? (
+              <>
+                <section className="grid gap-5 lg:grid-cols-2">
+                  <div className="rounded-lg border border-zinc-200 bg-white p-5">
+                    <div className="flex items-center gap-3">
+                      <ListChecks className="size-5 text-[#ff385c]" />
+                      <h2 className="text-xl font-semibold text-zinc-950">Quote checklist</h2>
+                    </div>
+                    <p className="mt-2 text-sm leading-6 text-zinc-600">
+                      Gather these before comparing prices so every quote uses the same assumptions.
+                    </p>
+                    <ul className="mt-4 grid gap-3 text-sm leading-6 text-zinc-700">
+                      {detailContent.quoteChecklist.map((item) => (
+                        <li key={item} className="flex gap-2">
+                          <CheckCircle2 className="mt-1 size-4 shrink-0 text-emerald-600" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="rounded-lg border border-zinc-200 bg-white p-5">
+                    <div className="flex items-center gap-3">
+                      <ReceiptText className="size-5 text-amber-600" />
+                      <h2 className="text-xl font-semibold text-zinc-950">Hidden costs to verify</h2>
+                    </div>
+                    <p className="mt-2 text-sm leading-6 text-zinc-600">
+                      These are the common add-ons that make the cheapest-looking option more expensive.
+                    </p>
+                    <ul className="mt-4 grid gap-3 text-sm leading-6 text-zinc-700">
+                      {detailContent.hiddenFees.map((fee) => (
+                        <li key={fee} className="flex gap-2">
+                          <span className="mt-2 size-1.5 shrink-0 rounded-full bg-amber-500" />
+                          <span>{fee}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </section>
+
+                <section>
+                  <div className="flex items-center gap-3">
+                    <FileSearch className="size-5 text-[#ff385c]" />
+                    <h2 className="text-2xl font-semibold text-zinc-950">Example situations</h2>
+                  </div>
+                  <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-600">
+                    Use these as thinking models, then verify the final price with your exact details.
+                  </p>
+                  <div className="mt-5 grid gap-4 lg:grid-cols-3">
+                    {detailContent.examples.map((example) => (
+                      <div key={example.title} className="rounded-lg border border-zinc-200 bg-white p-5">
+                        <h3 className="font-semibold text-zinc-950">{example.title}</h3>
+                        <div className="mt-4 grid gap-3 text-sm leading-6">
+                          <div>
+                            <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">Situation</p>
+                            <p className="mt-1 text-zinc-700">{example.situation}</p>
+                          </div>
+                          <div>
+                            <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">Compare</p>
+                            <p className="mt-1 text-zinc-700">{example.compare}</p>
+                          </div>
+                          <div>
+                            <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">Likely cheapest</p>
+                            <p className="mt-1 font-semibold text-zinc-950">{example.likelyCheapest}</p>
+                          </div>
+                        </div>
+                        <p className="mt-4 rounded-lg bg-[#f7f7f7] p-3 text-sm leading-6 text-zinc-700">{example.note}</p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+
+                <section className="rounded-lg border border-zinc-200 bg-zinc-50 p-5">
+                  <div className="flex items-start gap-3">
+                    <span className="mt-1 flex size-10 shrink-0 items-center justify-center rounded-full bg-white text-zinc-950 shadow-sm">
+                      <Info className="size-5" />
+                    </span>
+                    <div>
+                      <p className="text-sm font-semibold text-zinc-500">Recommendation confidence</p>
+                      <h2 className="mt-1 text-xl font-semibold text-zinc-950">{detailContent.confidence.label}</h2>
+                      <p className="mt-2 leading-7 text-zinc-700">{detailContent.confidence.note}</p>
+                      <div className="mt-4 border-t border-zinc-200 pt-4">
+                        <p className="text-sm font-semibold text-zinc-950">What still needs a live check</p>
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          {detailContent.confidence.missingData.map((item) => (
+                            <span key={item} className="rounded-full bg-white px-3 py-2 text-xs font-semibold text-zinc-700 shadow-sm">
+                              {item}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </>
+            ) : null}
 
             <section className="grid gap-5 lg:grid-cols-2">
               <div className="rounded-lg border border-zinc-200 bg-white p-5">
@@ -241,6 +397,27 @@ export default async function GuidePage({ params }: PageProps) {
                 ))}
               </div>
             </section>
+
+            {relatedGuides.length ? (
+              <section>
+                <h2 className="text-2xl font-semibold text-zinc-950">Related guides</h2>
+                <div className="mt-4 grid gap-3">
+                  {relatedGuides.map((relatedGuide) => (
+                    <Link
+                      key={relatedGuide.slug}
+                      href={`/cheapest-way-to/${relatedGuide.slug}`}
+                      className="group rounded-lg border border-zinc-200 bg-white p-4 transition hover:border-zinc-400"
+                    >
+                      <span className="flex items-center justify-between gap-4">
+                        <span className="font-semibold text-zinc-950">{relatedGuide.h1}</span>
+                        <ArrowUpRight className="size-4 shrink-0 text-zinc-500 transition group-hover:text-zinc-950" />
+                      </span>
+                      <span className="mt-2 block text-sm leading-6 text-zinc-600">{relatedGuide.description}</span>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            ) : null}
 
             <section>
               <h2 className="text-2xl font-semibold text-zinc-950">FAQs</h2>

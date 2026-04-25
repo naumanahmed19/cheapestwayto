@@ -3,7 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ArrowRight, CheckCircle2, Search } from "lucide-react";
 import { GuideCard } from "@/components/guide-card";
-import { categories, getCategory, getGuidesByCategory, guides as allGuides } from "@/data/site-content";
+import { categories, getCategory, getGuidesByCategory, getTopicHref, guides as allGuides } from "@/data/site-content";
 import { createMetadata, jsonLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
@@ -24,7 +24,9 @@ export async function generateMetadata({ params }: PageProps) {
     title: `${category.name} Cost Comparison Guides`,
     description: category.description,
     path: `/category/${category.slug}`,
-    keywords: category.examples.map((example) => `cheapest way to ${example}`)
+    keywords: category.examples.map((example) => `cheapest way to ${example}`),
+    image: category.image,
+    imageAlt: `${category.name} cost comparison guides`
   });
 }
 
@@ -40,12 +42,40 @@ export default async function CategoryPage({ params }: PageProps) {
     "@type": "CollectionPage",
     name: `${category.name} Cost Comparison Guides`,
     description: category.description,
-    url: `${siteConfig.url}/category/${category.slug}`
+    url: `${siteConfig.url}/category/${category.slug}`,
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: guides.map((guide, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: guide.h1,
+        url: `${siteConfig.url}/cheapest-way-to/${guide.slug}`
+      }))
+    }
+  };
+  const breadcrumbData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteConfig.url
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: category.name,
+        item: `${siteConfig.url}/category/${category.slug}`
+      }
+    ]
   };
 
   return (
     <main className="bg-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(structuredData)} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(breadcrumbData)} />
       <section className="border-b border-zinc-200 bg-white">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:px-8 lg:py-14">
           <div className="flex flex-col justify-center">
@@ -91,7 +121,7 @@ export default async function CategoryPage({ params }: PageProps) {
           <div className="relative min-h-72 overflow-hidden rounded-lg bg-zinc-100 lg:min-h-96">
             <Image
               src={category.image}
-              alt=""
+              alt={`${category.name} cost comparison guides`}
               fill
               priority
               sizes="(min-width: 1024px) 55vw, 100vw"
@@ -130,7 +160,7 @@ export default async function CategoryPage({ params }: PageProps) {
             category.examples.map((example) => (
               <Link
                 key={example}
-                href={`/cheapest-way-to/${example.replaceAll(" ", "-")}`}
+                href={getTopicHref(example)}
                 className="flex min-h-40 flex-col justify-between rounded-lg border border-dashed border-zinc-300 bg-white p-5 text-sm font-semibold text-zinc-950 transition hover:border-zinc-500"
               >
                 <span className="flex size-9 items-center justify-center rounded-full bg-zinc-100">

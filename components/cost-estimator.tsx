@@ -1,11 +1,30 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Calculator, CheckCircle2, PackageCheck, RotateCcw, Sparkles } from "lucide-react";
+import { Calculator, CheckCircle2, Plane, RotateCcw, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 function formatRange(low: number, high: number) {
   return `$${Math.round(low)}-${Math.round(high)}`;
+}
+
+const packagingOptions = [
+  { value: "mailer", label: "Mailer", description: "Soft clothes" },
+  { value: "box", label: "Box", description: "Mixed items" },
+  { value: "suitcase", label: "Suitcase", description: "Travel bag" }
+];
+
+const routeOptions = [
+  { value: "local", label: "Same region" },
+  { value: "another-state", label: "Another state" },
+  { value: "international", label: "International" }
+];
+
+function fitClass(fit: string) {
+  if (fit === "Strong fit") return "bg-emerald-50 text-emerald-700 ring-emerald-200";
+  if (fit === "Weak fit" || fit === "Not applicable") return "bg-zinc-100 text-zinc-500 ring-zinc-200";
+  return "bg-amber-50 text-amber-700 ring-amber-200";
 }
 
 export function ClothesShippingEstimator() {
@@ -62,82 +81,22 @@ export function ClothesShippingEstimator() {
   const recommendation = estimates[0];
 
   return (
-    <section className="rounded-lg border border-zinc-200 bg-white p-5 shadow-sm">
-      <div className="flex items-center gap-3">
-        <span className="flex size-10 items-center justify-center rounded-full bg-[#ff385c]/10 text-[#ff385c]">
+    <section className="overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-sm">
+      <div className="border-b border-zinc-200 p-5">
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <span className="flex size-10 items-center justify-center rounded-full bg-[#ff385c]/10 text-[#ff385c]">
           <Calculator className="size-5" />
-        </span>
-        <div>
-          <h2 className="text-xl font-semibold text-zinc-950">Clothes shipping cost planner</h2>
-          <p className="text-sm text-zinc-600">Planning ranges to help decide which rates to check first.</p>
-        </div>
-      </div>
-      <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
-        <label className="grid gap-2 text-sm font-medium text-zinc-800">
-          Total weight, lb
-          <input
-            type="number"
-            min="1"
-            value={weight}
-            onChange={(event) => setWeight(Number(event.target.value) || 1)}
-            className="h-11 rounded-lg border border-zinc-300 bg-white px-3 text-zinc-950 outline-none focus:border-zinc-950"
-          />
-        </label>
-        <label className="grid gap-2 text-sm font-medium text-zinc-800">
-          Boxes or mailers
-          <input
-            type="number"
-            min="1"
-            value={boxes}
-            onChange={(event) => setBoxes(Number(event.target.value) || 1)}
-            className="h-11 rounded-lg border border-zinc-300 bg-white px-3 text-zinc-950 outline-none focus:border-zinc-950"
-          />
-        </label>
-        <label className="grid gap-2 text-sm font-medium text-zinc-800">
-          Packaging
-          <select
-            value={packaging}
-            onChange={(event) => setPackaging(event.target.value)}
-            className="h-11 rounded-lg border border-zinc-300 bg-white px-3 text-zinc-950 outline-none focus:border-zinc-950"
-          >
-            <option value="mailer">Poly mailer</option>
-            <option value="box">Cardboard box</option>
-            <option value="suitcase">Suitcase</option>
-          </select>
-        </label>
-        <label className="grid gap-2 text-sm font-medium text-zinc-800">
-          Route
-          <select
-            value={distance}
-            onChange={(event) => setDistance(event.target.value)}
-            className="h-11 rounded-lg border border-zinc-300 bg-white px-3 text-zinc-950 outline-none focus:border-zinc-950"
-          >
-            <option value="local">Same region</option>
-            <option value="another-state">Another state</option>
-            <option value="international">International</option>
-          </select>
-        </label>
-        <label className="flex items-end gap-3 rounded-lg border border-zinc-200 bg-[#f7f7f7] px-3 py-2 text-sm font-medium text-zinc-800">
-          <input
-            type="checkbox"
-            checked={traveling}
-            onChange={(event) => setTraveling(event.target.checked)}
-            className="mb-1 size-4 accent-[#ff385c]"
-          />
-          I am flying too
-        </label>
-      </div>
-      <div className="mt-5 rounded-lg bg-[#f7f7f7] p-4">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <p className="flex gap-2 text-sm font-medium text-zinc-950">
-            <Sparkles className="mt-0.5 size-4 shrink-0 text-[#ff385c]" />
-            <span>
-              Check <strong>{recommendation.name}</strong> first, then compare the next two closest options.
             </span>
-          </p>
+            <div>
+              <h2 className="text-xl font-semibold text-zinc-950">Clothes shipping cost planner</h2>
+              <p className="text-sm leading-6 text-zinc-600">Enter rough details to rank the options worth checking first.</p>
+            </div>
+          </div>
           <Button
             type="button"
-            variant="secondary"
+            variant="ghost"
+            size="sm"
             onClick={() => {
               setWeight(8);
               setBoxes(1);
@@ -145,46 +104,166 @@ export function ClothesShippingEstimator() {
               setPackaging("box");
               setTraveling(false);
             }}
+            className="shrink-0"
           >
             <RotateCcw className="size-4" />
             Reset
           </Button>
         </div>
-        <div className="mt-4 overflow-x-auto rounded-lg border border-zinc-200 bg-white">
-          <table className="w-full min-w-[680px] text-left text-sm">
-            <thead className="bg-white text-zinc-500">
-              <tr>
-                <th className="p-3 font-medium">Option</th>
-                <th className="p-3 font-medium">Planning range</th>
-                <th className="p-3 font-medium">Fit</th>
-                <th className="p-3 font-medium">Why check it</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-zinc-200">
-              {estimates.map((estimate, index) => (
-                <tr key={estimate.name} className="align-top">
-                  <td className="p-3 font-semibold text-zinc-950">
-                    <span className="flex items-center gap-2">
-                      {index === 0 ? <PackageCheck className="size-4 text-[#ff385c]" /> : null}
-                      {estimate.name}
+      </div>
+
+      <div className="grid gap-0 lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="border-b border-zinc-200 p-5 lg:border-b-0 lg:border-r">
+          <div className="grid gap-4 sm:grid-cols-2">
+            <label className="grid gap-2 text-sm font-medium text-zinc-800">
+              Total weight
+              <div className="flex h-12 items-center rounded-lg border border-zinc-300 bg-white px-3 focus-within:border-zinc-950">
+                <input
+                  type="number"
+                  min="1"
+                  value={weight}
+                  onChange={(event) => setWeight(Number(event.target.value) || 1)}
+                  className="w-full bg-transparent text-lg font-semibold text-zinc-950 outline-none"
+                />
+                <span className="text-sm font-semibold text-zinc-500">lb</span>
+              </div>
+            </label>
+            <label className="grid gap-2 text-sm font-medium text-zinc-800">
+              Packages
+              <div className="flex h-12 items-center rounded-lg border border-zinc-300 bg-white px-3 focus-within:border-zinc-950">
+                <input
+                  type="number"
+                  min="1"
+                  value={boxes}
+                  onChange={(event) => setBoxes(Number(event.target.value) || 1)}
+                  className="w-full bg-transparent text-lg font-semibold text-zinc-950 outline-none"
+                />
+                <span className="text-sm font-semibold text-zinc-500">count</span>
+              </div>
+            </label>
+          </div>
+
+          <div className="mt-5">
+            <p className="text-sm font-medium text-zinc-800">Packaging</p>
+            <div className="mt-2 grid gap-2 sm:grid-cols-3">
+              {packagingOptions.map((option) => (
+                <button
+                  key={option.value}
+                  type="button"
+                  aria-pressed={packaging === option.value}
+                  onClick={() => setPackaging(option.value)}
+                  className={cn(
+                    "rounded-lg border p-3 text-left transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ff385c]",
+                    packaging === option.value
+                      ? "border-[#ff385c] bg-[#fff8fa]"
+                      : "border-zinc-200 bg-white hover:border-zinc-400"
+                  )}
+                >
+                  <span className="block text-sm font-semibold text-zinc-950">{option.label}</span>
+                  <span className="mt-1 block text-xs text-zinc-500">{option.description}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-5">
+            <p className="text-sm font-medium text-zinc-800">Route</p>
+            <div className="mt-2 grid gap-2">
+              {routeOptions.map((option) => (
+                <button
+                  key={option.value}
+                  type="button"
+                  aria-pressed={distance === option.value}
+                  onClick={() => setDistance(option.value)}
+                  className={cn(
+                    "flex h-11 items-center justify-between rounded-lg border px-3 text-sm font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ff385c]",
+                    distance === option.value
+                      ? "border-[#ff385c] bg-[#fff8fa] text-zinc-950"
+                      : "border-zinc-200 bg-white text-zinc-700 hover:border-zinc-400"
+                  )}
+                >
+                  {option.label}
+                  {distance === option.value ? <CheckCircle2 className="size-4 text-[#ff385c]" /> : null}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <button
+            type="button"
+            aria-pressed={traveling}
+            onClick={() => setTraveling((value) => !value)}
+            className={cn(
+              "mt-5 flex w-full items-center justify-between rounded-lg border px-4 py-3 text-left transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ff385c]",
+              traveling ? "border-[#ff385c] bg-[#fff8fa]" : "border-zinc-200 bg-[#f7f7f7] hover:border-zinc-400"
+            )}
+          >
+            <span className="flex items-center gap-3">
+              <Plane className={cn("size-5", traveling ? "text-[#ff385c]" : "text-zinc-500")} />
+              <span>
+                <span className="block text-sm font-semibold text-zinc-950">I am flying too</span>
+                <span className="mt-0.5 block text-xs text-zinc-500">Include checked-bag comparison</span>
+              </span>
+            </span>
+            <span
+              className={cn(
+                "flex size-5 items-center justify-center rounded-full border",
+                traveling ? "border-[#ff385c] bg-[#ff385c]" : "border-zinc-300 bg-white"
+              )}
+            >
+              {traveling ? <CheckCircle2 className="size-4 text-white" /> : null}
+            </span>
+          </button>
+        </div>
+
+        <div className="bg-[#f7f7f7] p-5">
+          <div className="rounded-lg bg-white p-5 shadow-sm ring-1 ring-zinc-200">
+            <p className="flex items-center gap-2 text-sm font-semibold text-[#ff385c]">
+              <Sparkles className="size-4" />
+              Start here
+            </p>
+            <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <h3 className="text-2xl font-semibold tracking-tight text-zinc-950">{recommendation.name}</h3>
+                <p className="mt-2 text-sm leading-6 text-zinc-600">{recommendation.note}</p>
+              </div>
+              <p className="text-3xl font-semibold tracking-tight text-zinc-950">{recommendation.range}</p>
+            </div>
+          </div>
+
+          <div className="mt-4 overflow-hidden rounded-lg bg-white shadow-sm ring-1 ring-zinc-200">
+            {estimates.map((estimate, index) => (
+              <div key={estimate.name} className="border-b border-zinc-200 p-4 last:border-b-0">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                  <div className="flex gap-3">
+                    <span
+                      className={cn(
+                        "flex size-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold",
+                        index === 0 ? "bg-[#ff385c] text-white" : "bg-zinc-100 text-zinc-600"
+                      )}
+                    >
+                      {index + 1}
                     </span>
-                  </td>
-                  <td className="p-3 text-zinc-700">{estimate.range}</td>
-                  <td className="p-3 text-zinc-700">
-                    <span className="inline-flex items-center gap-1 rounded-full bg-zinc-100 px-2 py-1 text-xs font-semibold text-zinc-700">
-                      <CheckCircle2 className="size-3.5 text-emerald-600" />
+                    <div>
+                      <p className="font-semibold text-zinc-950">{estimate.name}</p>
+                      <p className="mt-1 text-sm leading-6 text-zinc-600">{estimate.note}</p>
+                    </div>
+                  </div>
+                  <div className="flex shrink-0 items-center gap-2 sm:flex-col sm:items-end">
+                    <span className="font-semibold text-zinc-950">{estimate.range}</span>
+                    <span className={cn("rounded-full px-2 py-1 text-xs font-semibold ring-1", fitClass(estimate.fit))}>
                       {estimate.fit}
                     </span>
-                  </td>
-                  <td className="p-3 text-zinc-700">{estimate.note}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <p className="mt-3 text-xs leading-5 text-zinc-500">
+            Planning ranges only. Verify final prices with exact ZIP codes, dimensions, and packed weight.
+          </p>
         </div>
-        <p className="mt-3 text-xs leading-5 text-zinc-500">
-          These are rough planning ranges, not live carrier quotes. Always verify final prices with current carrier calculators using exact ZIP codes, dimensions, and packed weight.
-        </p>
       </div>
     </section>
   );
