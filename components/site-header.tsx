@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { CircleDollarSign, Search } from "lucide-react";
+import { CircleDollarSign } from "lucide-react";
+import { HeaderSearch } from "@/components/header-search";
 import { categories } from "@/data/site-content";
 
 export function SiteHeader() {
@@ -13,23 +14,7 @@ export function SiteHeader() {
           <span>CheapestWayTo</span>
         </Link>
         <div className="hidden justify-center lg:flex">
-          <nav className="flex items-center rounded-full border border-zinc-200 bg-white text-sm font-semibold text-zinc-800 shadow-sm">
-            {categories.slice(0, 3).map((category) => (
-              <Link
-                key={category.slug}
-                href={`/category/${category.slug}`}
-                className="border-r border-zinc-200 px-5 py-3 hover:text-zinc-950"
-              >
-                {category.name}
-              </Link>
-            ))}
-            <Link href="/search" className="flex items-center gap-3 py-2 pl-5 pr-2">
-              <span className="text-zinc-500">Search guides</span>
-              <span className="flex size-8 items-center justify-center rounded-full bg-[#ff385c] text-white">
-                <Search className="size-4" />
-              </span>
-            </Link>
-          </nav>
+          <HeaderSearch categories={categories.map(({ slug, name }) => ({ slug, name }))} />
         </div>
       </div>
     </header>
