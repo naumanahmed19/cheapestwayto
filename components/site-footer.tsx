@@ -24,6 +24,15 @@ export function SiteFooter() {
           <Link href="/editorial-policy" className="text-sm font-semibold text-zinc-950 hover:underline">
             Editorial policy
           </Link>
+          <Link href="/privacy-policy" className="text-sm font-semibold text-zinc-950 hover:underline">
+            Privacy policy
+          </Link>
+          <Link href="/terms" className="text-sm font-semibold text-zinc-950 hover:underline">
+            Terms
+          </Link>
+          <Link href="/cookie-policy" className="text-sm font-semibold text-zinc-950 hover:underline">
+            Cookie policy
+          </Link>
           {categories.slice(0, 8).map((category) => (
             <Link key={category.slug} href={`/category/${category.slug}`} className="text-sm hover:text-zinc-950">
               {category.name}

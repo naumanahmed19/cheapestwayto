@@ -67,6 +67,13 @@ export type Guide = {
 };
 
 export type GuideDetailContent = {
+  tools: {
+    name: string;
+    url: string;
+    bestFor: string;
+    useWhen: string;
+    watchOut: string;
+  }[];
   quoteChecklist: string[];
   hiddenFees: string[];
   examples: {
@@ -1556,6 +1563,29 @@ export const guides: Guide[] = [
 
 export const guideDetailContent: Record<string, GuideDetailContent> = {
   "ship-clothes": {
+    tools: [
+      {
+        name: "USPS Price Calculator",
+        url: "https://postcalc.usps.com/",
+        bestFor: "Official USPS baseline quote",
+        useWhen: "You have exact ZIP codes, packed weight, and dimensions.",
+        watchOut: "Retail USPS can lose to discounted online labels for heavier boxes."
+      },
+      {
+        name: "Pirate Ship",
+        url: "https://www.pirateship.com/rates",
+        bestFor: "Discounted USPS and UPS labels",
+        useWhen: "You can print a label and drop off the package yourself.",
+        watchOut: "Final price still depends on exact dimensions and service rules."
+      },
+      {
+        name: "UPS Shipping Quote",
+        url: "https://www.ups.com/us/en/shipping/quote",
+        bestFor: "Heavy boxes and UPS service comparison",
+        useWhen: "Clothes are in a box, especially 15 lb or more.",
+        watchOut: "Compare against discounted labels, not only counter pricing."
+      }
+    ],
     quoteChecklist: [
       "Origin and destination ZIP codes.",
       "Packed weight for each mailer or box.",
@@ -1604,6 +1634,29 @@ export const guideDetailContent: Record<string, GuideDetailContent> = {
     }
   },
   "ship-boxes-across-country": {
+    tools: [
+      {
+        name: "Pirate Ship",
+        url: "https://www.pirateship.com/rates",
+        bestFor: "Pricing several parcel boxes quickly",
+        useWhen: "You have a small move with a few standard boxes.",
+        watchOut: "Oversized boxes and bad measurements can change the price."
+      },
+      {
+        name: "UPS Shipping Quote",
+        url: "https://www.ups.com/us/en/shipping/quote",
+        bestFor: "Heavier parcel boxes",
+        useWhen: "Boxes are dense, valuable, or too heavy for USPS to be obviously cheapest.",
+        watchOut: "Check residential and pickup assumptions before paying."
+      },
+      {
+        name: "U-Haul U-Box",
+        url: "https://www.uhaul.com/UBox/",
+        bestFor: "Many boxes or small apartment moves",
+        useWhen: "You have enough boxes that parcel labels start adding up.",
+        watchOut: "Delivery, pickup, storage, moving help, and parking rules can affect the total."
+      }
+    ],
     quoteChecklist: [
       "Total number of boxes.",
       "Packed weight and dimensions for each box.",
@@ -1652,6 +1705,29 @@ export const guideDetailContent: Record<string, GuideDetailContent> = {
     }
   },
   "send-luggage": {
+    tools: [
+      {
+        name: "Your airline baggage page",
+        url: "https://www.delta.com/global/en/baggage/overview",
+        bestFor: "Checking whether a bag is cheaper than shipping",
+        useWhen: "You are flying on the same route as the luggage.",
+        watchOut: "Use your actual airline and fare class; baggage fees vary."
+      },
+      {
+        name: "ShipGo",
+        url: "https://www.shipgo.com/luggage-shipping",
+        bestFor: "Door-to-door luggage shipping quotes",
+        useWhen: "You want pickup, tracking, and delivery to a hotel or address.",
+        watchOut: "Convenience can cost more than checking a bag or boxing a parcel."
+      },
+      {
+        name: "Luggage Forward",
+        url: "https://www.luggageforward.com/",
+        bestFor: "Luggage, golf clubs, skis, and specialty travel gear",
+        useWhen: "Timing, handling, and travel convenience matter more than the absolute lowest price.",
+        watchOut: "Check category dimensions and overweight rebilling rules."
+      }
+    ],
     quoteChecklist: [
       "Bag weight and outside dimensions.",
       "Whether you are flying on the same route.",
@@ -1700,6 +1776,29 @@ export const guideDetailContent: Record<string, GuideDetailContent> = {
     }
   },
   "replace-car-keys": {
+    tools: [
+      {
+        name: "FindALocksmith.com",
+        url: "https://www.findalocksmith.com/",
+        bestFor: "Finding an ALOA-listed locksmith",
+        useWhen: "You want a local automotive locksmith before calling the dealer.",
+        watchOut: "Still ask whether they handle your exact vehicle and include programming."
+      },
+      {
+        name: "AAA lost key guidance",
+        url: "https://www.aaa.com/autorepair/articles/what-to-do-when-you-lose-your-car-keys",
+        bestFor: "Understanding what information to gather",
+        useWhen: "You lost all keys and need VIN, ownership, and key-type prep.",
+        watchOut: "Roadside benefits depend on your membership and local club."
+      },
+      {
+        name: "Consumer Reports key fob guide",
+        url: "https://www.consumerreports.org/cars/car-maintenance/how-to-replace-your-car-key-fob-a4802255222/",
+        bestFor: "Newer smart keys or restricted fobs",
+        useWhen: "A locksmith cannot program the key or the fob must be OEM.",
+        watchOut: "Dealer pricing may require towing, parts wait time, and separate programming fees."
+      }
+    ],
     quoteChecklist: [
       "Vehicle year, make, model, and VIN.",
       "Whether you still have one working key.",
@@ -1748,6 +1847,29 @@ export const guideDetailContent: Record<string, GuideDetailContent> = {
     }
   },
   "heat-a-house": {
+    tools: [
+      {
+        name: "DOE Energy Saver",
+        url: "https://www.energy.gov/energysaver/energy-saver",
+        bestFor: "Understanding heating, air sealing, insulation, and audits",
+        useWhen: "You need a trustworthy order of operations before hiring anyone.",
+        watchOut: "It gives guidance, not a quote for your home."
+      },
+      {
+        name: "ENERGY STAR Rebate Finder",
+        url: "https://www.energystar.gov/rebatefinder",
+        bestFor: "Finding local rebates on efficient products",
+        useWhen: "You are pricing thermostats, heat pumps, insulation-related products, or appliances.",
+        watchOut: "Rebates vary by ZIP code and may have contractor or product requirements."
+      },
+      {
+        name: "Local utility audit or rebate page",
+        url: "https://www.energy.gov/energysaver/weatherization",
+        bestFor: "Home energy audits and weatherization programs",
+        useWhen: "You want to reduce heat loss before replacing equipment.",
+        watchOut: "Availability, eligibility, and incentives are local."
+      }
+    ],
     quoteChecklist: [
       "Heating fuel type and current utility rate.",
       "Average monthly heating cost in winter.",
@@ -1796,6 +1918,36 @@ export const guideDetailContent: Record<string, GuideDetailContent> = {
     }
   },
   "book-hotels": {
+    tools: [
+      {
+        name: "Google Hotels",
+        url: "https://www.google.com/travel/hotels",
+        bestFor: "Fast map-based hotel comparison",
+        useWhen: "You want to scan location, ratings, amenities, and partner prices quickly.",
+        watchOut: "Some booking links are ads or partner links, so verify the final all-in price."
+      },
+      {
+        name: "KAYAK Hotels",
+        url: "https://www.kayak.com/hotels",
+        bestFor: "Metasearch across many travel sites",
+        useWhen: "You want to compare the same hotel across multiple sellers.",
+        watchOut: "Click through and confirm taxes, fees, cancellation terms, and room type."
+      },
+      {
+        name: "Booking.com",
+        url: "https://www.booking.com/",
+        bestFor: "Large inventory, reviews, and flexible-cancellation filters",
+        useWhen: "You want many property types and clear guest-review signals.",
+        watchOut: "Double-check payment messages and always pay through the official platform or hotel."
+      },
+      {
+        name: "Hotel direct website",
+        url: "https://www.google.com/search?q=hotel+official+website",
+        bestFor: "Member rates, loyalty points, and easier changes",
+        useWhen: "You have narrowed down the exact hotel.",
+        watchOut: "Avoid copycat booking pages; verify the official domain."
+      }
+    ],
     quoteChecklist: [
       "Exact dates and whether they can move.",
       "Required neighborhood or commute distance.",
@@ -1844,6 +1996,29 @@ export const guideDetailContent: Record<string, GuideDetailContent> = {
     }
   },
   "file-taxes": {
+    tools: [
+      {
+        name: "IRS Free File",
+        url: "https://www.irs.gov/file-your-taxes-for-free/",
+        bestFor: "Free federal filing if eligible",
+        useWhen: "Your AGI and tax situation fit an IRS partner offer.",
+        watchOut: "Check state filing cost and partner eligibility before committing."
+      },
+      {
+        name: "IRS VITA/TCE locator",
+        url: "https://irs.treasury.gov/freetaxprep/",
+        bestFor: "Free guided tax preparation",
+        useWhen: "You qualify and want in-person or assisted help.",
+        watchOut: "Appointments fill up and programs have scope limits."
+      },
+      {
+        name: "MilTax",
+        url: "https://www.militaryonesource.mil/financial-legal/taxes/miltax-military-tax-services/",
+        bestFor: "Military tax filing support",
+        useWhen: "You are eligible through the military community.",
+        watchOut: "Eligibility and state-return support depend on your situation."
+      }
+    ],
     quoteChecklist: [
       "Tax year, filing status, and adjusted gross income.",
       "State or multiple-state filing needs.",
@@ -1892,6 +2067,29 @@ export const guideDetailContent: Record<string, GuideDetailContent> = {
     }
   },
   "start-an-llc": {
+    tools: [
+      {
+        name: "SBA state registration guide",
+        url: "https://www.sba.gov/business-guide/launch-your-business/register-your-business",
+        bestFor: "Finding the right state office and filing basics",
+        useWhen: "You want to file directly instead of buying a formation package.",
+        watchOut: "State fees and annual requirements still need to be checked with your state."
+      },
+      {
+        name: "IRS EIN application",
+        url: "https://www.irs.gov/businesses/small-businesses-self-employed/apply-for-an-employer-identification-number-ein-online",
+        bestFor: "Getting a federal tax ID for free",
+        useWhen: "Your LLC needs an EIN after formation.",
+        watchOut: "Avoid third-party sites that charge for an EIN."
+      },
+      {
+        name: "SCORE mentoring",
+        url: "https://www.sba.gov/local-assistance/resource-partners/score-business-mentoring",
+        bestFor: "Free business mentor guidance",
+        useWhen: "You are unsure whether an LLC, sole proprietorship, or another structure fits.",
+        watchOut: "Mentorship is guidance, not a substitute for legal or tax advice."
+      }
+    ],
     quoteChecklist: [
       "State where the business actually operates.",
       "Number of owners and ownership split.",
@@ -1940,6 +2138,36 @@ export const guideDetailContent: Record<string, GuideDetailContent> = {
     }
   },
   "learn-coding": {
+    tools: [
+      {
+        name: "freeCodeCamp",
+        url: "https://www.freecodecamp.org/",
+        bestFor: "Free structured practice and projects",
+        useWhen: "You want a no-cost path with lots of exercises.",
+        watchOut: "You still need your own portfolio projects and feedback."
+      },
+      {
+        name: "The Odin Project",
+        url: "https://www.theodinproject.com/",
+        bestFor: "Free full-stack web development curriculum",
+        useWhen: "You want a project-heavy path and can self-study consistently.",
+        watchOut: "It is demanding and less hand-held than paid courses."
+      },
+      {
+        name: "MDN Learn Web Development",
+        url: "https://developer.mozilla.org/en-US/docs/Learn_web_development",
+        bestFor: "Web fundamentals and reference-quality explanations",
+        useWhen: "You want to understand HTML, CSS, JavaScript, and browser basics.",
+        watchOut: "It is not a complete career-coaching program."
+      },
+      {
+        name: "CareerOneStop training finder",
+        url: "https://www.careeronestop.org/FindTraining/find-training.aspx",
+        bestFor: "Local classes, certificates, and training programs",
+        useWhen: "You need structure, credentials, or funding options.",
+        watchOut: "Compare costs, completion time, and job outcomes before enrolling."
+      }
+    ],
     quoteChecklist: [
       "Goal: hobby, job switch, automation, or school support.",
       "Weekly hours available for practice.",
@@ -1988,6 +2216,36 @@ export const guideDetailContent: Record<string, GuideDetailContent> = {
     }
   },
   "start-a-cleaning-business": {
+    tools: [
+      {
+        name: "SBA local assistance",
+        url: "https://www.sba.gov/local-assistance",
+        bestFor: "Local startup guidance and business counseling",
+        useWhen: "You need help with permits, business structure, or startup planning.",
+        watchOut: "Local rules still need to be verified with your city/state."
+      },
+      {
+        name: "Google Business Profile",
+        url: "https://support.google.com/business/answer/31662",
+        bestFor: "Free local visibility on Google Search and Maps",
+        useWhen: "You are ready to collect reviews and show service-area details.",
+        watchOut: "Keep address/service-area settings accurate for privacy and trust."
+      },
+      {
+        name: "Canva flyer maker",
+        url: "https://www.canva.com/create/flyers/",
+        bestFor: "Low-cost flyers and simple local marketing materials",
+        useWhen: "You need a basic offer sheet before paying for design.",
+        watchOut: "Do not overinvest in branding before you know which services sell."
+      },
+      {
+        name: "Thimble cleaning insurance",
+        url: "https://www.thimble.com/industry/cleaning-business-insurance",
+        bestFor: "Fast general-liability insurance quote comparison",
+        useWhen: "A client asks for proof of insurance or you want basic coverage.",
+        watchOut: "Compare coverage limits and exclusions with at least one other insurer."
+      }
+    ],
     quoteChecklist: [
       "Service type: residential, move-out, vacation rental, or commercial.",
       "Required supplies for the first narrow service package.",

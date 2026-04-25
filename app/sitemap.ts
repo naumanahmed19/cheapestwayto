@@ -30,6 +30,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.6
     },
+    {
+      url: `${siteConfig.url}/privacy-policy`,
+      lastModified: latestGuideDate,
+      changeFrequency: "monthly",
+      priority: 0.5
+    },
+    {
+      url: `${siteConfig.url}/terms`,
+      lastModified: latestGuideDate,
+      changeFrequency: "monthly",
+      priority: 0.5
+    },
+    {
+      url: `${siteConfig.url}/cookie-policy`,
+      lastModified: latestGuideDate,
+      changeFrequency: "monthly",
+      priority: 0.5
+    },
     ...categories.map((category) => ({
       url: `${siteConfig.url}/category/${category.slug}`,
       lastModified: new Date(

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Search } from "lucide-react";
 import { GuideCard } from "@/components/guide-card";
-import { categories, getCategory, guides, keywordBacklog, normalizeSearchTerm } from "@/data/site-content";
+import { categories, getCategory, getGuideDetailContent, guides, keywordBacklog, normalizeSearchTerm } from "@/data/site-content";
 import { createMetadata, jsonLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
@@ -31,6 +31,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   const matchingGuides = query
     ? guides.filter((guide) => {
         const category = getCategory(guide.category);
+        const detailContent = getGuideDetailContent(guide.slug);
         const haystack = [
           guide.title,
           guide.h1,
@@ -38,7 +39,17 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
           guide.primaryKeyword,
           ...guide.secondaryKeywords,
           guide.listingMeta,
-          category?.name || ""
+          category?.name || "",
+          ...(detailContent?.quoteChecklist ?? []),
+          ...(detailContent?.hiddenFees ?? []),
+          ...(detailContent?.tools.flatMap((tool) => [tool.name, tool.bestFor, tool.useWhen, tool.watchOut]) ?? []),
+          ...(detailContent?.examples.flatMap((example) => [
+            example.title,
+            example.situation,
+            example.compare,
+            example.likelyCheapest,
+            example.note
+          ]) ?? [])
         ]
           .join(" ")
           .toLowerCase();

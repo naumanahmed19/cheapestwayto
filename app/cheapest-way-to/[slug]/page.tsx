@@ -27,6 +27,15 @@ type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
+function faviconUrl(url: string) {
+  try {
+    const { hostname } = new URL(url);
+    return `https://www.google.com/s2/favicons?domain=${hostname}&sz=64`;
+  } catch {
+    return "https://www.google.com/s2/favicons?domain=example.com&sz=64";
+  }
+}
+
 export function generateStaticParams() {
   return guides.map((guide) => ({ slug: guide.slug }));
 }
@@ -236,6 +245,54 @@ export default async function GuidePage({ params }: PageProps) {
 
             {detailContent ? (
               <>
+                <section>
+                  <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+                    <div>
+                      <h2 className="text-2xl font-semibold text-zinc-950">Where to check first</h2>
+                      <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-600">
+                        Start with these specific sites or tools, then verify the final price and terms before paying.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="mt-5 grid gap-4 lg:grid-cols-3">
+                    {detailContent.tools.map((tool) => (
+                      <a
+                        key={tool.url}
+                        href={tool.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="group flex min-h-64 flex-col justify-between rounded-lg border border-zinc-200 bg-white p-5 transition hover:border-zinc-400 hover:shadow-sm"
+                      >
+                        <span>
+                          <span className="flex items-start justify-between gap-4">
+                            <span className="flex min-w-0 items-start gap-3">
+                              <span className="flex size-12 shrink-0 items-center justify-center rounded-lg border border-zinc-200 bg-white shadow-sm">
+                                <Image
+                                  src={faviconUrl(tool.url)}
+                                  alt={`${tool.name} logo`}
+                                  width={28}
+                                  height={28}
+                                  unoptimized
+                                  className="rounded-sm"
+                                />
+                              </span>
+                              <span className="min-w-0">
+                                <span className="block text-sm font-semibold text-[#ff385c]">{tool.bestFor}</span>
+                                <span className="mt-2 block text-xl font-semibold tracking-tight text-zinc-950">{tool.name}</span>
+                              </span>
+                            </span>
+                            <ExternalLink className="size-4 shrink-0 text-zinc-500 transition group-hover:text-zinc-950" />
+                          </span>
+                          <span className="mt-4 block text-sm leading-6 text-zinc-700">{tool.useWhen}</span>
+                        </span>
+                        <span className="mt-5 block rounded-lg bg-[#f7f7f7] p-3 text-sm leading-6 text-zinc-600">
+                          <strong className="text-zinc-950">Watch:</strong> {tool.watchOut}
+                        </span>
+                      </a>
+                    ))}
+                  </div>
+                </section>
+
                 <section className="grid gap-5 lg:grid-cols-2">
                   <div className="rounded-lg border border-zinc-200 bg-white p-5">
                     <div className="flex items-center gap-3">
