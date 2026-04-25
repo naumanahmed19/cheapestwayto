@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, CheckCircle2, Search, SlidersHorizontal, Sparkles, TrendingUp } from "lucide-react";
+import { ArrowRight, CheckCircle2, SlidersHorizontal, Sparkles, TrendingUp } from "lucide-react";
+import { CategorySearchForm } from "@/components/category-search-form";
 import { GuideCard } from "@/components/guide-card";
 import { categories, guides, keywordBacklog } from "@/data/site-content";
 import { createMetadata, jsonLd } from "@/lib/seo";
@@ -54,25 +55,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="mx-auto mt-8 grid max-w-5xl overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-xl md:grid-cols-[1fr_1fr_1fr_auto] md:rounded-full">
-            <Link href="/category/shipping-moving" className="border-b border-zinc-200 px-6 py-4 hover:bg-zinc-50 md:border-b-0 md:border-r">
-              <span className="block text-xs font-semibold uppercase tracking-wide text-zinc-950">Compare</span>
-              <span className="mt-1 block text-sm text-zinc-500">Ship, move, repair</span>
-            </Link>
-            <Link href="/cheapest-way-to/ship-clothes" className="border-b border-zinc-200 px-6 py-4 hover:bg-zinc-50 md:border-b-0 md:border-r">
-              <span className="block text-xs font-semibold uppercase tracking-wide text-zinc-950">First guide</span>
-              <span className="mt-1 block text-sm text-zinc-500">Clothes shipping</span>
-            </Link>
-            <Link href="/category/travel" className="border-b border-zinc-200 px-6 py-4 hover:bg-zinc-50 md:border-b-0 md:border-r">
-              <span className="block text-xs font-semibold uppercase tracking-wide text-zinc-950">Browse</span>
-              <span className="mt-1 block text-sm text-zinc-500">Travel and home costs</span>
-            </Link>
-            <Link href="/cheapest-way-to/ship-clothes" className="flex items-center justify-center p-3">
-              <span className="flex size-12 items-center justify-center rounded-full bg-[#ff385c] text-white">
-                <Search className="size-5" />
-              </span>
-            </Link>
-          </div>
+          <CategorySearchForm categories={categories.map(({ slug, name }) => ({ slug, name }))} />
 
           {featuredGuide ? (
             <div className="mt-10 grid gap-5 lg:grid-cols-[1.35fr_0.65fr]">
