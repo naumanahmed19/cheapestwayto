@@ -6,6 +6,6 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function absoluteUrl(path = "") {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://cheapestwayto.com";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://cheapestwayto.net";
   return `${baseUrl}${path}`;
 }
