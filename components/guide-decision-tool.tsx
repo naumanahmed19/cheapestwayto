@@ -20,7 +20,7 @@ export function GuideDecisionTool({ guide }: GuideDecisionToolProps) {
   if (!selected) return null;
 
   return (
-    <section className="rounded-lg border border-zinc-200 bg-white p-5 shadow-sm">
+    <section className="border-y border-zinc-200 py-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <div className="flex items-center gap-2 text-sm font-semibold text-[#ff385c]">
@@ -35,7 +35,7 @@ export function GuideDecisionTool({ guide }: GuideDecisionToolProps) {
         </p>
       </div>
 
-      <div className="mt-5 grid gap-3 md:grid-cols-3">
+      <div className="mt-5 grid gap-2 md:grid-cols-3">
         {situations.map((situation) => {
           const isSelected = situation.id === selected.id;
           return (
@@ -44,10 +44,10 @@ export function GuideDecisionTool({ guide }: GuideDecisionToolProps) {
               type="button"
               onClick={() => setSelectedId(situation.id)}
               className={cn(
-                "min-h-28 rounded-lg border p-4 text-left transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ff385c]",
+                "min-h-28 border-l-4 p-4 text-left transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ff385c]",
                 isSelected
-                  ? "border-[#ff385c] bg-[#fff8fa] shadow-sm"
-                  : "border-zinc-200 bg-white hover:border-zinc-400 hover:bg-zinc-50"
+                  ? "border-[#ff385c] bg-[#fff8fa]"
+                  : "border-zinc-200 bg-zinc-50 hover:border-zinc-400 hover:bg-white"
               )}
             >
               <span className="flex items-center justify-between gap-3">
@@ -60,7 +60,7 @@ export function GuideDecisionTool({ guide }: GuideDecisionToolProps) {
         })}
       </div>
 
-      <div className="mt-5 grid gap-5 rounded-lg bg-[#f7f7f7] p-5 lg:grid-cols-[1fr_1fr]">
+      <div className="mt-5 grid gap-5 bg-[#f7f7f7] p-5 lg:grid-cols-[1fr_1fr]">
         <div>
           <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">Best starting point</p>
           <h3 className="mt-2 text-2xl font-semibold tracking-tight text-zinc-950">{selected.recommendation}</h3>

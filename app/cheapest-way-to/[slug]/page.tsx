@@ -149,46 +149,48 @@ export default async function GuidePage({ params }: PageProps) {
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(breadcrumbData)} />
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(optionListData)} />
       <article>
-        <section className="border-b border-zinc-200 bg-white">
-          <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8 lg:py-14">
-            <div className="flex flex-col justify-center">
+        <section className="relative isolate overflow-hidden border-b border-zinc-200 bg-white">
+          <Image
+            src={guide.image}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="absolute inset-0 -z-20 object-cover opacity-45 [mask-image:linear-gradient(90deg,transparent_0%,transparent_34%,black_58%,black_100%)]"
+          />
+          <div className="absolute inset-0 -z-10 bg-gradient-to-r from-white via-white/92 to-white/20" />
+          <div className="absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-t from-white to-transparent" />
+          <div className="mx-auto grid min-h-[520px] max-w-7xl items-end px-4 pb-12 pt-24 sm:px-6 lg:grid-cols-[0.95fr_1fr] lg:px-8 lg:pb-16 lg:pt-28">
+            <div className="max-w-3xl">
               <Link
                 href={category ? `/category/${category.slug}` : "/"}
-                className="inline-flex w-fit items-center gap-2 rounded-full border border-zinc-200 px-4 py-2 text-sm font-semibold text-zinc-800 hover:border-zinc-400"
+                className="inline-flex w-fit items-center gap-2 rounded-full border border-zinc-200 bg-white/80 px-4 py-2 text-sm font-semibold text-zinc-800 shadow-sm backdrop-blur hover:border-zinc-400"
               >
                 {category?.name || "Cost Comparison"}
                 <ArrowUpRight className="size-4" />
               </Link>
               <h1 className="mt-5 text-4xl font-semibold tracking-tight text-zinc-950 sm:text-5xl">{guide.h1}</h1>
-              <p className="mt-5 text-lg leading-8 text-zinc-600">{guide.description}</p>
-              <div className="mt-7 grid gap-3 text-sm sm:grid-cols-3">
-                <div className="rounded-lg border border-zinc-200 bg-white p-4">
-                  <Clock3 className="size-5 text-[#ff385c]" />
-                  <p className="mt-2 font-semibold text-zinc-950">Updated</p>
-                  <p className="mt-1 text-zinc-500">{guide.updated}</p>
+              <p className="mt-5 max-w-2xl text-lg leading-8 text-zinc-600">{guide.description}</p>
+              <div className="mt-7 flex flex-wrap gap-x-6 gap-y-3 border-t border-zinc-200 pt-5 text-sm">
+                <div className="flex items-center gap-2">
+                  <Clock3 className="size-4 text-[#ff385c]" />
+                  <span className="text-zinc-500">Updated</span>
+                  <span className="font-semibold text-zinc-950">{guide.updated}</span>
                 </div>
-                <div className="rounded-lg border border-zinc-200 bg-white p-4">
-                  <Layers3 className="size-5 text-amber-600" />
-                  <p className="mt-2 font-semibold text-zinc-950">Options</p>
-                  <p className="mt-1 text-zinc-500">{guide.options.length} comparisons</p>
+                <div className="flex items-center gap-2">
+                  <Layers3 className="size-4 text-amber-600" />
+                  <span className="text-zinc-500">Options</span>
+                  <span className="font-semibold text-zinc-950">{guide.options.length} comparisons</span>
                 </div>
-                <div className="rounded-lg border border-zinc-200 bg-white p-4">
-                  <ShieldCheck className="size-5 text-emerald-600" />
-                  <p className="mt-2 font-semibold text-zinc-950">Focus</p>
-                  <p className="mt-1 text-zinc-500">Fees and tradeoffs</p>
+                <div className="flex items-center gap-2">
+                  <ShieldCheck className="size-4 text-emerald-600" />
+                  <span className="text-zinc-500">Focus</span>
+                  <span className="font-semibold text-zinc-950">Fees and tradeoffs</span>
                 </div>
               </div>
             </div>
-            <div className="relative min-h-80 overflow-hidden rounded-lg bg-zinc-100 lg:min-h-[460px]">
-              <Image
-                src={guide.image}
-                alt={guide.h1}
-                fill
-                priority
-                sizes="(min-width: 1024px) 55vw, 100vw"
-                className="object-cover"
-              />
-              <div className="absolute bottom-4 left-4 rounded-full bg-white/95 px-4 py-2 text-sm font-semibold text-zinc-950 shadow-lg">
+            <div className="hidden self-end justify-self-end pb-1 lg:block">
+              <div className="rounded-full border border-zinc-200 bg-white/90 px-4 py-2 text-sm font-semibold text-zinc-950 shadow-lg backdrop-blur">
                 {guide.listingMeta}
               </div>
             </div>
@@ -196,7 +198,7 @@ export default async function GuidePage({ params }: PageProps) {
         </section>
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[1fr_320px] lg:px-8">
           <div className="space-y-8">
-            <section className="rounded-lg border border-[#ff385c]/20 bg-[#fff8fa] p-5">
+            <section className="border-l-4 border-[#ff385c] bg-[#fff8fa] p-5">
               <div className="flex items-start gap-3">
                 <span className="mt-1 flex size-10 shrink-0 items-center justify-center rounded-full bg-[#ff385c] text-white">
                   <CircleDollarSign className="size-5" />
@@ -254,47 +256,47 @@ export default async function GuidePage({ params }: PageProps) {
                       </p>
                     </div>
                   </div>
-                  <div className="mt-5 grid gap-4 lg:grid-cols-3">
+                  <div className="mt-5 divide-y divide-zinc-200 border-y border-zinc-200">
                     {detailContent.tools.map((tool) => (
                       <a
                         key={tool.url}
                         href={tool.url}
                         target="_blank"
                         rel="noreferrer"
-                        className="group flex min-h-64 flex-col justify-between rounded-lg border border-zinc-200 bg-white p-5 transition hover:border-zinc-400 hover:shadow-sm"
+                        className="group grid gap-4 py-5 transition hover:bg-zinc-50 sm:grid-cols-[minmax(220px,0.8fr)_1fr] sm:px-3"
                       >
-                        <span>
-                          <span className="flex items-start justify-between gap-4">
-                            <span className="flex min-w-0 items-start gap-3">
-                              <span className="flex size-12 shrink-0 items-center justify-center rounded-lg border border-zinc-200 bg-white shadow-sm">
-                                <Image
-                                  src={faviconUrl(tool.url)}
-                                  alt={`${tool.name} logo`}
-                                  width={28}
-                                  height={28}
-                                  unoptimized
-                                  className="rounded-sm"
-                                />
-                              </span>
-                              <span className="min-w-0">
-                                <span className="block text-sm font-semibold text-[#ff385c]">{tool.bestFor}</span>
-                                <span className="mt-2 block text-xl font-semibold tracking-tight text-zinc-950">{tool.name}</span>
-                              </span>
-                            </span>
-                            <ExternalLink className="size-4 shrink-0 text-zinc-500 transition group-hover:text-zinc-950" />
+                        <span className="flex min-w-0 items-start gap-3">
+                          <span className="flex size-11 shrink-0 items-center justify-center rounded-lg border border-zinc-200 bg-white">
+                            <Image
+                              src={faviconUrl(tool.url)}
+                              alt={`${tool.name} logo`}
+                              width={26}
+                              height={26}
+                              unoptimized
+                              className="rounded-sm"
+                            />
                           </span>
-                          <span className="mt-4 block text-sm leading-6 text-zinc-700">{tool.useWhen}</span>
+                          <span className="min-w-0">
+                            <span className="block text-sm font-semibold text-[#ff385c]">{tool.bestFor}</span>
+                            <span className="mt-1 flex items-center gap-2 text-xl font-semibold tracking-tight text-zinc-950">
+                              {tool.name}
+                              <ExternalLink className="size-4 shrink-0 text-zinc-500 transition group-hover:text-zinc-950" />
+                            </span>
+                          </span>
                         </span>
-                        <span className="mt-5 block rounded-lg bg-[#f7f7f7] p-3 text-sm leading-6 text-zinc-600">
-                          <strong className="text-zinc-950">Watch:</strong> {tool.watchOut}
+                        <span className="text-sm leading-6 text-zinc-700">
+                          <span className="block">{tool.useWhen}</span>
+                          <span className="mt-2 block text-zinc-600">
+                            <strong className="text-zinc-950">Watch:</strong> {tool.watchOut}
+                          </span>
                         </span>
                       </a>
                     ))}
                   </div>
                 </section>
 
-                <section className="grid gap-5 lg:grid-cols-2">
-                  <div className="rounded-lg border border-zinc-200 bg-white p-5">
+                <section className="grid gap-8 border-y border-zinc-200 py-6 lg:grid-cols-2">
+                  <div>
                     <div className="flex items-center gap-3">
                       <ListChecks className="size-5 text-[#ff385c]" />
                       <h2 className="text-xl font-semibold text-zinc-950">Quote checklist</h2>
@@ -311,7 +313,7 @@ export default async function GuidePage({ params }: PageProps) {
                       ))}
                     </ul>
                   </div>
-                  <div className="rounded-lg border border-zinc-200 bg-white p-5">
+                  <div>
                     <div className="flex items-center gap-3">
                       <ReceiptText className="size-5 text-amber-600" />
                       <h2 className="text-xl font-semibold text-zinc-950">Hidden costs to verify</h2>
@@ -338,11 +340,14 @@ export default async function GuidePage({ params }: PageProps) {
                   <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-600">
                     Use these as thinking models, then verify the final price with your exact details.
                   </p>
-                  <div className="mt-5 grid gap-4 lg:grid-cols-3">
+                  <div className="mt-5 divide-y divide-zinc-200 border-y border-zinc-200">
                     {detailContent.examples.map((example) => (
-                      <div key={example.title} className="rounded-lg border border-zinc-200 bg-white p-5">
-                        <h3 className="font-semibold text-zinc-950">{example.title}</h3>
-                        <div className="mt-4 grid gap-3 text-sm leading-6">
+                      <div key={example.title} className="grid gap-4 py-5 sm:grid-cols-[220px_1fr]">
+                        <div>
+                          <h3 className="font-semibold text-zinc-950">{example.title}</h3>
+                          <p className="mt-2 text-sm leading-6 text-zinc-600">{example.note}</p>
+                        </div>
+                        <div className="grid gap-4 text-sm leading-6 md:grid-cols-3">
                           <div>
                             <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">Situation</p>
                             <p className="mt-1 text-zinc-700">{example.situation}</p>
@@ -356,13 +361,12 @@ export default async function GuidePage({ params }: PageProps) {
                             <p className="mt-1 font-semibold text-zinc-950">{example.likelyCheapest}</p>
                           </div>
                         </div>
-                        <p className="mt-4 rounded-lg bg-[#f7f7f7] p-3 text-sm leading-6 text-zinc-700">{example.note}</p>
                       </div>
                     ))}
                   </div>
                 </section>
 
-                <section className="rounded-lg border border-zinc-200 bg-zinc-50 p-5">
+                <section className="bg-zinc-50 p-5">
                   <div className="flex items-start gap-3">
                     <span className="mt-1 flex size-10 shrink-0 items-center justify-center rounded-full bg-white text-zinc-950 shadow-sm">
                       <Info className="size-5" />
@@ -375,7 +379,7 @@ export default async function GuidePage({ params }: PageProps) {
                         <p className="text-sm font-semibold text-zinc-950">What still needs a live check</p>
                         <div className="mt-3 flex flex-wrap gap-2">
                           {detailContent.confidence.missingData.map((item) => (
-                            <span key={item} className="rounded-full bg-white px-3 py-2 text-xs font-semibold text-zinc-700 shadow-sm">
+                            <span key={item} className="rounded-full border border-zinc-200 bg-white px-3 py-2 text-xs font-semibold text-zinc-700">
                               {item}
                             </span>
                           ))}
@@ -387,8 +391,8 @@ export default async function GuidePage({ params }: PageProps) {
               </>
             ) : null}
 
-            <section className="grid gap-5 lg:grid-cols-2">
-              <div className="rounded-lg border border-zinc-200 bg-white p-5">
+            <section className="grid gap-8 border-y border-zinc-200 py-6 lg:grid-cols-2">
+              <div>
                 <div className="flex items-center gap-3">
                   <Gauge className="size-5 text-[#ff385c]" />
                   <h2 className="text-xl font-semibold text-zinc-950">What changes the price</h2>
@@ -402,7 +406,7 @@ export default async function GuidePage({ params }: PageProps) {
                   ))}
                 </ul>
               </div>
-              <div className="rounded-lg border border-zinc-200 bg-white p-5">
+              <div>
                 <div className="flex items-center gap-3">
                   <ClipboardCheck className="size-5 text-emerald-600" />
                   <h2 className="text-xl font-semibold text-zinc-950">Cheapest practical path</h2>
@@ -418,7 +422,7 @@ export default async function GuidePage({ params }: PageProps) {
                   ))}
                 </ol>
               </div>
-              <div className="rounded-lg border border-amber-200 bg-amber-50 p-5 lg:col-span-2">
+              <div className="border-l-4 border-amber-500 bg-amber-50 p-5 lg:col-span-2">
                 <div className="flex items-center gap-3">
                   <TriangleAlert className="size-5 text-amber-700" />
                   <h2 className="text-xl font-semibold text-zinc-950">Red flags before you pay</h2>
@@ -436,14 +440,14 @@ export default async function GuidePage({ params }: PageProps) {
 
             <section>
               <h2 className="text-2xl font-semibold text-zinc-950">Sources to check before booking</h2>
-              <div className="mt-4 grid gap-3">
+              <div className="mt-4 divide-y divide-zinc-200 border-y border-zinc-200">
                 {guide.sources.map((source) => (
                   <a
                     key={source.url}
                     href={source.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="group rounded-lg border border-zinc-200 bg-white p-4 transition hover:border-zinc-400"
+                    className="group block py-4 transition hover:bg-zinc-50 sm:px-3"
                   >
                     <span className="flex items-center justify-between gap-4">
                       <span className="font-semibold text-zinc-950">{source.label}</span>
@@ -458,12 +462,12 @@ export default async function GuidePage({ params }: PageProps) {
             {relatedGuides.length ? (
               <section>
                 <h2 className="text-2xl font-semibold text-zinc-950">Related guides</h2>
-                <div className="mt-4 grid gap-3">
+                <div className="mt-4 divide-y divide-zinc-200 border-y border-zinc-200">
                   {relatedGuides.map((relatedGuide) => (
                     <Link
                       key={relatedGuide.slug}
                       href={`/cheapest-way-to/${relatedGuide.slug}`}
-                      className="group rounded-lg border border-zinc-200 bg-white p-4 transition hover:border-zinc-400"
+                      className="group block py-4 transition hover:bg-zinc-50 sm:px-3"
                     >
                       <span className="flex items-center justify-between gap-4">
                         <span className="font-semibold text-zinc-950">{relatedGuide.h1}</span>
