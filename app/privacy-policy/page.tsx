@@ -69,7 +69,7 @@ export default function PrivacyPolicyPage() {
         <div>
           <h2 className="text-2xl font-semibold text-zinc-950">Cookies and Analytics</h2>
           <p className="mt-3">
-            The current app does not intentionally set non-essential cookies, run advertising trackers, or use analytics scripts. If analytics, ads, affiliate tracking, embedded third-party widgets, or similar technologies are added later, we should update this policy, publish a cookie inventory, and request consent where required.
+            The current app loads Google Analytics to understand aggregate guide usage, search behavior, and page performance. Analytics providers may process technical data such as page URL, device details, browser information, approximate location, and interaction events. If advertising, affiliate tracking, embedded third-party widgets, or similar technologies are added later, we should update this policy, publish a cookie inventory, and request consent where required.
           </p>
           <p className="mt-3">
             See the <Link href="/cookie-policy" className="font-semibold text-zinc-950 hover:underline">Cookie Policy</Link> for more detail.

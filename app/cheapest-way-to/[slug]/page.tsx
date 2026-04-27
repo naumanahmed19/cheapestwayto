@@ -77,8 +77,13 @@ export default async function GuidePage({ params }: PageProps) {
     dateModified: guide.updated,
     author: {
       "@type": "Organization",
-      name: siteConfig.name,
-      url: siteConfig.url
+      name: siteConfig.editorialName,
+      url: `${siteConfig.url}/editorial-policy`
+    },
+    reviewedBy: {
+      "@type": "Organization",
+      name: siteConfig.editorialName,
+      url: `${siteConfig.url}/methodology`
     },
     publisher: {
       "@type": "Organization",
@@ -89,18 +94,6 @@ export default async function GuidePage({ params }: PageProps) {
       }
     },
     mainEntityOfPage: `${siteConfig.url}/cheapest-way-to/${guide.slug}`
-  };
-  const faqData = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: guide.faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer
-      }
-    }))
   };
   const breadcrumbData = {
     "@context": "https://schema.org",
@@ -145,7 +138,6 @@ export default async function GuidePage({ params }: PageProps) {
   return (
     <main className="bg-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(structuredData)} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(faqData)} />
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(breadcrumbData)} />
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(optionListData)} />
       <article>
@@ -186,6 +178,13 @@ export default async function GuidePage({ params }: PageProps) {
                   <ShieldCheck className="size-4 text-emerald-600" />
                   <span className="text-zinc-500">Focus</span>
                   <span className="font-semibold text-zinc-950">Fees and tradeoffs</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <ClipboardCheck className="size-4 text-emerald-600" />
+                  <span className="text-zinc-500">Reviewed by</span>
+                  <Link href="/editorial-policy" className="font-semibold text-zinc-950 hover:underline">
+                    {siteConfig.editorialName}
+                  </Link>
                 </div>
               </div>
             </div>
@@ -507,6 +506,19 @@ export default async function GuidePage({ params }: PageProps) {
               <div className="flex items-center justify-between gap-4">
                 <span className="text-zinc-500">Updated</span>
                 <span className="font-semibold text-zinc-950">{guide.updated}</span>
+              </div>
+            </div>
+              <div className="mt-6 border-t border-zinc-200 pt-5">
+              <h3 className="text-sm font-semibold text-zinc-950">Trust signals</h3>
+              <div className="mt-4 grid gap-3">
+                <Link href="/methodology" className="flex items-center justify-between text-sm text-zinc-600 hover:text-zinc-950">
+                  Methodology
+                  <ArrowUpRight className="size-3.5" />
+                </Link>
+                <Link href="/contact" className="flex items-center justify-between text-sm text-zinc-600 hover:text-zinc-950">
+                  Corrections
+                  <ArrowUpRight className="size-3.5" />
+                </Link>
               </div>
             </div>
             <div className="mt-6 border-t border-zinc-200 pt-5">
