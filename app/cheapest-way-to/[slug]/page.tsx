@@ -30,7 +30,7 @@ type PageProps = {
 function faviconUrl(url: string) {
   try {
     const { hostname } = new URL(url);
-    return `https://www.google.com/s2/favicons?domain=${hostname}&sz=64`;
+    return `https://www.google.com/s2/favicons?domain=${encodeURIComponent(hostname)}&sz=64`;
   } catch {
     return "https://www.google.com/s2/favicons?domain=example.com&sz=64";
   }
