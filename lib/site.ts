@@ -4,6 +4,8 @@ export const siteConfig = {
   name: "CheapestWayTo",
   domain: new URL(siteUrl).hostname,
   url: siteUrl,
+  editorialName: "CheapestWayTo Editorial Team",
+  contactEmail: `editorial@${new URL(siteUrl).hostname}`,
   description:
     "Compare the cheapest ways to ship, move, travel, repair, and handle everyday costs with practical calculators and transparent tradeoffs."
 };

@@ -8,7 +8,7 @@ import { createMetadata, jsonLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
 export const metadata = createMetadata({
-  title: "CheapestWayTo - Compare the Cheapest Ways to Do Almost Anything",
+  title: "CheapestWayTo - Compare Cheap Cost Guides",
   description:
     "Find the cheapest way to ship, move, travel, repair, start, file, learn, and buy with practical comparison guides and calculators.",
   path: "/",
@@ -52,6 +52,9 @@ export default function Home() {
             </h1>
             <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-zinc-600">
               Browse practical comparisons for shipping, travel, repairs, cars, money, and admin tasks with clear options and hidden-fee notes.
+            </p>
+            <p className="mx-auto mt-4 max-w-3xl text-sm leading-7 text-zinc-600">
+              Each guide starts with the same question: what is likely to be cheapest for a real person with a specific constraint? We compare official calculators, provider rules, recurring fees, timing, eligibility, and situations where the lowest upfront price becomes the wrong choice. Guides show the assumptions behind each recommendation so readers can verify live prices before booking, shipping, filing, repairing, or paying.
             </p>
           </div>
 
@@ -178,6 +181,27 @@ export default function Home() {
               <GuideCard key={guide.slug} guide={guide} priority={index === 0} />
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-3 lg:px-8">
+        <div>
+          <h2 className="text-2xl font-semibold text-zinc-950">How comparisons are reviewed</h2>
+          <p className="mt-3 text-sm leading-7 text-zinc-600">
+            CheapestWayTo separates fixed fees from variable costs, checks official sources where possible, and marks every guide with an updated date. When a topic depends on location, weight, timing, eligibility, or provider rules, the guide points readers to the exact details they need before trusting a quote.
+          </p>
+        </div>
+        <div>
+          <h2 className="text-2xl font-semibold text-zinc-950">What makes a cheaper option risky</h2>
+          <p className="mt-3 text-sm leading-7 text-zinc-600">
+            Low prices can hide dimensional weight, service minimums, airport or pickup fees, renewal costs, cancellation terms, or eligibility limits. The comparison tables and red-flag sections are designed to catch those costs before a reader chooses an option that only looks cheap.
+          </p>
+        </div>
+        <div>
+          <h2 className="text-2xl font-semibold text-zinc-950">Where to verify final prices</h2>
+          <p className="mt-3 text-sm leading-7 text-zinc-600">
+            The site does not replace live quotes. It narrows the shortlist and links to official calculators, provider pages, agencies, and practical checklists so readers can confirm the final all-in price using their ZIP code, dates, dimensions, documents, or local rules.
+          </p>
         </div>
       </section>
     </main>

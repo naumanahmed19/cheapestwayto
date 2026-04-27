@@ -24,6 +24,12 @@ export function SiteFooter() {
           <Link href="/editorial-policy" className="text-sm font-semibold text-zinc-950 hover:underline">
             Editorial policy
           </Link>
+          <Link href="/methodology" className="text-sm font-semibold text-zinc-950 hover:underline">
+            Methodology
+          </Link>
+          <Link href="/contact" className="text-sm font-semibold text-zinc-950 hover:underline">
+            Contact
+          </Link>
           <Link href="/privacy-policy" className="text-sm font-semibold text-zinc-950 hover:underline">
             Privacy policy
           </Link>
