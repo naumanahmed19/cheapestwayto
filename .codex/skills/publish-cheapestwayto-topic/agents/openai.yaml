@@ -1,0 +1,4 @@
+interface:
+  display_name: "Publish CheapestWayTo Topic"
+  short_description: "Research and publish cost guides"
+  default_prompt: "Use $publish-cheapestwayto-topic to research and publish a new CheapestWayTo guide."
