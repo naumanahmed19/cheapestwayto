@@ -1284,6 +1284,190 @@ export const guides: Guide[] = [
     ]
   },
   {
+    slug: "get-a-passport-fast",
+    category: "legal-admin",
+    title: "Cheapest Way to Get a Passport Fast in 2026",
+    h1: "Cheapest Way to Get a Passport Fast",
+    description:
+      "Compare routine, expedited, urgent agency appointments, return delivery, USPS acceptance, photos, and private courier options for a faster U.S. passport.",
+    primaryKeyword: "cheapest way to get a passport fast",
+    secondaryKeywords: [
+      "cheapest way to expedite passport",
+      "how to get a passport fast",
+      "urgent passport cost",
+      "passport expedited fee",
+      "fastest way to get a passport",
+      "same day passport appointment"
+    ],
+    image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&q=80",
+    listingMeta: "Expedited fees, agency appointments, and delivery",
+    updated: "2026-05-05",
+    verdict:
+      "If you have at least six weeks, routine service is cheapest. If travel is sooner, the cheapest official speed-up is the $60 expedited service; for travel within 14 days, try for a free passport-agency appointment instead of paying a private courier extra fees.",
+    options: [
+      {
+        name: "Routine renewal or application",
+        cost: "No speed fee; adult passport book is $130 plus a $35 acceptance fee for DS-11 applicants",
+        bestFor: "Travel at least 6 weeks away",
+        watchOut: "Routine processing is 4-6 weeks and mailing time is not included"
+      },
+      {
+        name: "Official expedited service",
+        cost: "$60 extra; current processing is 2-3 weeks before mailing time",
+        bestFor: "Trips less than 6 weeks away but not inside the urgent window",
+        watchOut: "You still need to pay normal passport fees and account for mail time"
+      },
+      {
+        name: "Passport agency urgent appointment",
+        cost: "No appointment fee; expect regular passport fees plus the $60 expedite fee",
+        bestFor: "International travel within 14 days, or a foreign visa needed within 28 days",
+        watchOut: "Appointments are limited, required, and not guaranteed"
+      },
+      {
+        name: "1-3 day return delivery",
+        cost: "$22.05 for faster return delivery of a passport book",
+        bestFor: "Cutting mailing risk after approval",
+        watchOut: "It does not speed up application processing and is not available for passport cards only"
+      },
+      {
+        name: "USPS acceptance with photo",
+        cost: "$35 acceptance fee plus $15 photo fee if needed",
+        bestFor: "First-time applicants and children who want one-stop paperwork and photos",
+        watchOut: "Renewal-eligible adults must renew by mail or online, not in person"
+      },
+      {
+        name: "Private courier or expeditor",
+        cost: "Often adds separate service fees on top of all government fees",
+        bestFor: "People who need help handling documents and accept the extra cost",
+        watchOut: "Couriers cannot get your passport faster than applying at a passport agency"
+      }
+    ],
+    decisionTool: {
+      title: "Pick the cheapest fast-passport path",
+      prompt: "How soon do you travel?",
+      situations: [
+        {
+          id: "six-plus-weeks",
+          label: "6+ weeks away",
+          summary: "You have enough time for the normal queue plus mailing.",
+          recommendation: "Use routine service and avoid expedite, courier, and premium shipping fees.",
+          why: "Routine service has no extra speed fee and is the lowest official path when your trip is not close.",
+          nextSteps: [
+            "Confirm whether you can renew online, renew by mail, or must apply in person.",
+            "Use the State Department fee calculator for the exact product you need.",
+            "Book an acceptance appointment early if you need Form DS-11."
+          ],
+          watchOut: [
+            "Processing times do not include mailing time.",
+            "Online renewal is routine only and cannot be used for travel in less than 6 weeks."
+          ]
+        },
+        {
+          id: "two-to-six-weeks",
+          label: "2-6 weeks away",
+          summary: "Routine service is risky, but there may still be time to mail or submit at an acceptance facility.",
+          recommendation: "Pay the official $60 expedited fee and consider $22.05 return delivery for a passport book.",
+          why: "The official expedite fee is usually the cheapest real speed-up before the urgent appointment window opens.",
+          nextSteps: [
+            "Add the $60 expedite fee to the application fee.",
+            "Write EXPEDITE on a mailed renewal envelope if renewing by mail.",
+            "Use trackable outbound shipping if timing is tight."
+          ],
+          watchOut: [
+            "Expedited processing still excludes mailing time.",
+            "Return delivery only speeds the completed passport, not the review."
+          ]
+        },
+        {
+          id: "under-two-weeks",
+          label: "Under 14 days",
+          summary: "You are inside the urgent travel window.",
+          recommendation: "Try for a passport agency or center appointment instead of paying a third-party appointment service.",
+          why: "The government does not charge to make an appointment, and couriers cannot get a passport faster than applying at an agency.",
+          nextSteps: [
+            "Use the official appointment system if you have not applied.",
+            "Call the passport contact center if you already applied.",
+            "Bring proof of international travel and all required documents."
+          ],
+          watchOut: [
+            "Appointments are not guaranteed.",
+            "Do not pay anyone for a government appointment slot."
+          ]
+        }
+      ]
+    },
+    costDrivers: [
+      "Passport product: book, card, or both.",
+      "Applicant type: adult renewal, first-time adult, or child under 16.",
+      "Speed choice: routine, expedited, or urgent agency appointment.",
+      "Mailing choices, photo costs, and travel costs to an agency or acceptance facility.",
+      "Whether a private courier adds service fees on top of government fees."
+    ],
+    cheapestPath: [
+      "Use routine service if travel is at least 6 weeks away.",
+      "Renew online or by mail when eligible to avoid the $35 acceptance fee.",
+      "Use official expedited service for trips less than 6 weeks away.",
+      "Use a passport agency appointment for true urgent travel within 14 days.",
+      "Avoid private appointment sellers and couriers unless you knowingly want document-handling help."
+    ],
+    redFlags: [
+      "Any site charging to make a passport agency appointment.",
+      "A courier promising faster service than a passport agency.",
+      "Forgetting that processing times exclude mailing time.",
+      "Using online renewal when traveling in less than 6 weeks.",
+      "Paying for return delivery on a passport card-only application."
+    ],
+    sources: [
+      {
+        label: "State Department passport fees",
+        url: "https://travel.state.gov/content/travel/en/passports/how-apply/fees.html",
+        note: "Official application, acceptance, expedited, return delivery, and payment rules."
+      },
+      {
+        label: "State Department processing times",
+        url: "https://travel.state.gov/content/travel/en/passports/how-apply/processing-times.html",
+        note: "Current routine, expedited, and urgent processing windows."
+      },
+      {
+        label: "Get my passport fast",
+        url: "https://travel.state.gov/content/travel/en/passports/get-fast.html",
+        note: "Official rules for routine, expedited, urgent travel, and life-or-death emergency service."
+      },
+      {
+        label: "USPS passport services",
+        url: "https://www.usps.com/international/passports.htm",
+        note: "USPS acceptance and photo fees plus appointment guidance."
+      }
+    ],
+    faqs: [
+      {
+        question: "What is the cheapest way to get a passport fast?",
+        answer:
+          "Use routine service if you have at least six weeks. If you need it faster, pay the official $60 expedited fee instead of paying a private courier, unless you specifically need document-handling help."
+      },
+      {
+        question: "How much does it cost to expedite a passport?",
+        answer:
+          "The official expedited service fee is $60 per application. You still pay the passport application fee, and first-time DS-11 applicants also pay the $35 acceptance fee."
+      },
+      {
+        question: "Can I get a same-day passport?",
+        answer:
+          "A passport agency may be able to help with urgent international travel, but you need an appointment and proof of travel within 14 calendar days. The government does not guarantee appointment availability."
+      },
+      {
+        question: "Is a passport courier worth it?",
+        answer:
+          "Usually not if your goal is the lowest price. The State Department says courier companies charge extra fees and do not get you a passport faster than applying at a passport agency."
+      },
+      {
+        question: "Should I pay for 1-3 day delivery?",
+        answer:
+          "It can be worth the $22.05 fee when timing is tight, but it only speeds up return delivery after the passport is mailed. It does not shorten processing time."
+      }
+    ]
+  },
+  {
     slug: "learn-coding",
     category: "education-career",
     title: "Cheapest Way to Learn Coding",
@@ -2137,6 +2321,84 @@ export const guideDetailContent: Record<string, GuideDetailContent> = {
       ]
     }
   },
+  "get-a-passport-fast": {
+    tools: [
+      {
+        name: "State Department fee calculator",
+        url: "https://travel.state.gov/content/travel/en/passports/how-apply/fees.html",
+        bestFor: "Calculating the exact government fee",
+        useWhen: "You know the applicant age, passport product, and speed option.",
+        watchOut: "First-time DS-11 applicants pay the acceptance facility separately."
+      },
+      {
+        name: "Passport processing times",
+        url: "https://travel.state.gov/content/travel/en/passports/how-apply/processing-times.html",
+        bestFor: "Checking current routine and expedited windows",
+        useWhen: "You are deciding whether the $60 expedited fee is necessary.",
+        watchOut: "Mailing time is outside the listed processing window."
+      },
+      {
+        name: "Passport agency appointments",
+        url: "https://travel.state.gov/content/travel/en/passports/get-fast/passport-agencies.html",
+        bestFor: "Urgent travel inside 14 calendar days",
+        useWhen: "You have proof of imminent international travel or need a foreign visa within 28 days.",
+        watchOut: "Appointments are required and availability is not guaranteed."
+      },
+      {
+        name: "USPS passport appointments",
+        url: "https://www.usps.com/international/passports.htm",
+        bestFor: "First-time applications, children, and photo services",
+        useWhen: "You need an acceptance facility or a one-stop photo appointment.",
+        watchOut: "Eligible adult renewals must be done by mail or online."
+      }
+    ],
+    quoteChecklist: [
+      "Travel date and whether a foreign visa is also needed.",
+      "Applicant type: adult renewal, first-time adult, child, or name change.",
+      "Passport product: book, card, or both.",
+      "Eligibility for online or mail renewal.",
+      "Photo, outbound mailing, return delivery, and travel-to-agency costs."
+    ],
+    hiddenFees: [
+      "$35 acceptance fee for DS-11 applications.",
+      "$60 expedited service fee.",
+      "$22.05 faster return delivery for passport books.",
+      "Passport photo fees such as the $15 USPS photo service.",
+      "Private courier service fees and travel costs to an agency."
+    ],
+    examples: [
+      {
+        title: "Trip in eight weeks",
+        situation: "Adult renewal and travel is comfortably outside the rush window.",
+        compare: "Online or mail renewal with routine service versus expedited.",
+        likelyCheapest: "Routine renewal.",
+        note: "Do not pay the $60 expedite fee unless mailing risk or dates change."
+      },
+      {
+        title: "Trip in one month",
+        situation: "Travel is less than six weeks away but not inside 14 days.",
+        compare: "Official expedited service, outbound shipping, and faster return delivery.",
+        likelyCheapest: "Official expedited service.",
+        note: "A courier usually adds cost without beating official agency speed."
+      },
+      {
+        title: "Trip next week",
+        situation: "International travel is within 14 calendar days.",
+        compare: "Passport agency appointment, proof of travel, and regular government fees.",
+        likelyCheapest: "Official urgent appointment if available.",
+        note: "There is no government appointment fee, and availability is not guaranteed."
+      }
+    ],
+    confidence: {
+      label: "Strong for official fee decisions",
+      note: "Passport fees and timing are well documented by the State Department and USPS, but appointment availability and local travel costs can change quickly.",
+      missingData: [
+        "Live agency appointment availability.",
+        "User's exact renewal eligibility.",
+        "Local photo, shipping, and travel-to-agency costs."
+      ]
+    }
+  },
   "learn-coding": {
     tools: [
       {
@@ -2300,7 +2562,6 @@ export const keywordBacklog = [
   "cheapest way to ship shoes",
   "cheapest way to ship furniture",
   "cheapest way to move out of state",
-  "cheapest way to get a passport fast",
   "cheapest way to get a CDL",
   "cheapest way to send money internationally",
   "cheapest way to rent a car",
