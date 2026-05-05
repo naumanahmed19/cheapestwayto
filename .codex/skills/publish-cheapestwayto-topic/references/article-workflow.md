@@ -22,41 +22,12 @@ If the user does not provide a topic:
 
 ## Guide Data Shape
 
-Add one object to the exported `guides` array in `data/site-content.ts`:
+Read the local `Guide` and `GuideDetailContent` type definitions in `data/site-content.ts` before writing. The current schema usually requires:
 
-```ts
-{
-  slug: "ship-a-bike",
-  category: "shipping-moving",
-  title: "Cheapest Way to Ship a Bike in 2026",
-  h1: "Cheapest Way to Ship a Bike",
-  description: "Compare bike shipping boxes, parcel carriers, airline bike fees, local bike shops, and specialty shippers.",
-  primaryKeyword: "cheapest way to ship a bike",
-  secondaryKeywords: [
-    "cheapest way to ship a bicycle",
-    "bike shipping cost",
-    "ship a bike across country"
-  ],
-  updated: "2026-05-05",
-  verdict: "For a boxed bike, discounted parcel labels are often cheapest when dimensions stay under surcharge thresholds. Specialty bike shippers can be worth it when packing help and damage protection matter.",
-  options: [
-    {
-      name: "Discounted parcel label",
-      cost: "Often cheapest for a self-packed bike box",
-      bestFor: "People who can pack the bike safely",
-      watchOut: "Oversize and dimensional-weight fees can erase the savings"
-    }
-  ],
-  faqs: [
-    {
-      question: "What is the cheapest way to ship a bike across the country?",
-      answer: "Start with discounted parcel labels for a self-packed bike box, then compare specialty bike shippers if you need a box, pickup, or packing help."
-    }
-  ]
-}
-```
+- `Guide`: slug, category, title, h1, description, keywords, image, listingMeta, updated, verdict, options, decisionTool, costDrivers, cheapestPath, redFlags, sources, and FAQs.
+- `guideDetailContent[slug]`: tools, quoteChecklist, hiddenFees, examples, and confidence.
 
-Use this shape exactly unless the app schema has changed. The current page renders `verdict`, `options`, keyword coverage, and FAQs automatically.
+Use nearby guides as the formatting template. Keep each field useful rather than decorative: options should compare real routes, the decision tool should choose among common user situations, sources should link to primary references, and detail content should help users quote or verify the cost.
 
 ## Publishing Checklist
 
@@ -64,6 +35,7 @@ Before committing:
 
 - Run the duplicate helper and confirm there is no existing equivalent guide.
 - Confirm the guide category exists.
+- Add both the `guides` entry and matching `guideDetailContent` entry when the current schema includes detail content.
 - Remove the topic from `keywordBacklog` when the new guide covers it.
 - Ensure the route works through `generateStaticParams`; no route file should be needed for a standard guide.
 - Run `bun run lint`.

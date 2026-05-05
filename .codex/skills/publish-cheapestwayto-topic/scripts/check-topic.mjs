@@ -53,7 +53,9 @@ if (!repoRoot) {
 
 const contentPath = path.join(repoRoot, "data", "site-content.ts");
 const content = fs.readFileSync(contentPath, "utf8");
-const guideSectionMatch = content.match(/export const guides:\s*Guide\[\]\s*=\s*\[([\s\S]*?)\];\s*export const keywordBacklog/);
+const guideSectionMatch =
+  content.match(/export const guides:\s*Guide\[\]\s*=\s*\[([\s\S]*?)\];\s*export const guideDetailContent/) ||
+  content.match(/export const guides:\s*Guide\[\]\s*=\s*\[([\s\S]*?)\];\s*export const keywordBacklog/);
 const guideContent = guideSectionMatch ? guideSectionMatch[1] : content;
 const suggestedSlug = slugify(topic);
 const normalizedTopic = normalizeKeyword(topic);
