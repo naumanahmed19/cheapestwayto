@@ -1742,6 +1742,190 @@ export const guides: Guide[] = [
           "Avoid expensive branding packages, too many specialty chemicals, paid lead platforms, and complex software until you know which jobs and customers are profitable."
       }
     ]
+  },
+  {
+    slug: "ship-a-bike",
+    category: "shipping-moving",
+    title: "Cheapest Way to Ship a Bike in 2026",
+    h1: "Cheapest Way to Ship a Bike",
+    description:
+      "Compare BikeFlights, ShipBikes, UPS, FedEx, USPS, Amtrak, and airline bike fees before shipping a bicycle.",
+    primaryKeyword: "cheapest way to ship a bike",
+    secondaryKeywords: [
+      "cheapest way to ship a bicycle",
+      "cheapest way to ship a bike across country",
+      "bike shipping cost",
+      "ship a bike with UPS",
+      "ship a bike with FedEx",
+      "cheapest way to fly with a bike"
+    ],
+    image: "https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=1200&q=80",
+    listingMeta: "Bike boxes, carriers, trains, and flights",
+    updated: "2026-05-09",
+    verdict:
+      "For a boxed standard bike in the U.S., a bike-specific discounted label from BikeFlights or ShipBikes is usually the cheapest place to start. If you are already taking the same trip, Amtrak checked-bike service or an airline bike case can be cheaper, but only when your route, station, airline, and case size fit the rules.",
+    options: [
+      {
+        name: "BikeFlights or ShipBikes discounted ground label",
+        cost: "Often lowest for domestic boxed bikes; ShipBikes cites $40-$120 plus insurance for many contiguous U.S. shipments",
+        bestFor: "Standard road, gravel, commuter, and mountain bikes in a proper bike box",
+        watchOut: "Oversize boxes, bad dimensions, pickup fees, protection coverage, and e-bike rules can change the total"
+      },
+      {
+        name: "UPS or FedEx direct ground shipping",
+        cost: "Route-specific; usually worth comparing against bike-specific labels",
+        bestFor: "Shippers who want a direct carrier quote, drop-off control, or business account rates",
+        watchOut: "Large bike boxes trigger dimensional weight, size limits, and possible retail-counter price shock"
+      },
+      {
+        name: "Amtrak checked or boxed bicycle service",
+        cost: "Amtrak lists boxed bicycle checking at $10, with many staffed stations selling bike boxes for $15",
+        bestFor: "Trips where both stations support checked baggage or bike service",
+        watchOut: "Service is route and station dependent, and you still need to travel on the train"
+      },
+      {
+        name: "Airline checked bicycle",
+        cost: "Often the standard checked-bag fee if packed within the airline's bike limits",
+        bestFor: "Flying with the bike on the same itinerary",
+        watchOut: "Overweight, oversize, fragile-item releases, and hard-case requirements vary by airline"
+      },
+      {
+        name: "Local bike shop pack-and-ship",
+        cost: "Usually higher, but can prevent expensive damage",
+        bestFor: "High-value bikes, carbon frames, or riders without tools or packing experience",
+        watchOut: "Separate packing labor, box cost, carrier label, insurance, and claim responsibility"
+      }
+    ],
+    decisionTool: {
+      title: "Choose the cheapest bike shipping path",
+      prompt: "How are you moving the bike?",
+      situations: [
+        {
+          id: "standard-bike",
+          label: "Standard bike only",
+          summary: "You need to ship one regular bicycle and are not traveling with it.",
+          recommendation: "Quote BikeFlights and ShipBikes first, then compare one UPS or FedEx ground quote.",
+          why: "Bike-specific services buy carrier capacity for bicycle boxes and make it easier to avoid retail-rate surprises.",
+          nextSteps: [
+            "Get or reuse the smallest bike box that safely fits the bike.",
+            "Measure the packed box after disassembly, not before.",
+            "Compare drop-off service before adding pickup or protection upgrades."
+          ],
+          watchOut: [
+            "A box over carrier limits can create a very large penalty.",
+            "Declared value is not the same as automatic full replacement coverage."
+          ]
+        },
+        {
+          id: "traveling-too",
+          label: "Traveling too",
+          summary: "You are flying or taking the train on the same route.",
+          recommendation: "Check Amtrak or airline bike rules before buying a parcel label.",
+          why: "When the route supports it, paying a bike baggage fee can beat shipping a large box door to door.",
+          nextSteps: [
+            "Confirm the exact train stations or airline itinerary accept bikes.",
+            "Check weight and linear-inch limits before buying a case.",
+            "Leave time for check-in, disassembly, and reassembly."
+          ],
+          watchOut: [
+            "Many Amtrak bike options depend on train equipment and station service.",
+            "Airlines may require a durable bike container and may charge overweight fees."
+          ]
+        },
+        {
+          id: "e-bike",
+          label: "E-bike",
+          summary: "The bike has a lithium-ion battery installed.",
+          recommendation: "Use an e-bike-specific ground option and follow battery instructions exactly.",
+          why: "E-bike batteries add safety rules, ground-only limits, heavier packaging, and fewer eligible routes.",
+          nextSteps: [
+            "Confirm the service accepts your e-bike and route before packing.",
+            "Keep the battery installed only if the service allows it.",
+            "Use a sturdy box rated for the bike's weight and protect the battery area heavily."
+          ],
+          watchOut: [
+            "Standalone or damaged e-bike batteries are often prohibited.",
+            "Mislabeling an e-bike can create serious safety and penalty risks."
+          ]
+        }
+      ]
+    },
+    costDrivers: [
+      "Packed box dimensions and dimensional weight.",
+      "Actual bike weight, including pedals, wheels, accessories, and packaging.",
+      "Drop-off versus pickup service.",
+      "Insurance, declared value, signature, and protection plans.",
+      "E-bike battery rules, ground-only routes, and heavier packaging.",
+      "Whether you already have a reusable bike box or need to buy one."
+    ],
+    cheapestPath: [
+      "Remove pedals, front wheel, handlebars, accessories, and anything that increases box size.",
+      "Use the smallest safe bike box and measure length, width, height, girth, and packed weight.",
+      "Quote BikeFlights and ShipBikes before carrier retail counters.",
+      "If you are traveling, compare Amtrak or airline bike fees before shipping.",
+      "Add pickup, professional packing, or extra protection only when the bike value or logistics justify it."
+    ],
+    redFlags: [
+      "A quote based on an unpacked bike instead of final box dimensions.",
+      "Leaving old hazmat markings, barcodes, or labels on the box.",
+      "Shipping an e-bike without reading battery and ground-service rules.",
+      "Assuming USPS will be cheapest for a full-size bike box.",
+      "Skipping photos of the packed bike when buying protection coverage."
+    ],
+    sources: [
+      {
+        label: "FedEx how to ship a bike",
+        url: "https://www.fedex.com/en-us/shipping/how-to-ship-a-bike.html",
+        note: "FedEx bike box size, packing steps, 95 lb bike-box limit, and Ground/Home Delivery size rules."
+      },
+      {
+        label: "UPS package size and weight limits",
+        url: "https://www.ups.com/us/en/support/shipping-support/shipping-dimensions-weight.page",
+        note: "UPS package limits, length-plus-girth measurement, and dimensional-weight guidance."
+      },
+      {
+        label: "USPS Ground Advantage",
+        url: "https://www.usps.com/ship/ground-advantage.htm",
+        note: "USPS weight, length-plus-girth, dimensional-weight, and nonstandard fee rules."
+      },
+      {
+        label: "ShipBikes rate information",
+        url: "https://www.shipbikes.com/frequently-asked-questions/",
+        note: "ShipBikes states typical one-way contiguous U.S. bicycle shipping cost and insurance pricing."
+      },
+      {
+        label: "Amtrak bicycles",
+        url: "https://www.amtrak.com/bikes",
+        note: "Amtrak bike service types, checked boxed-bike fee, box price, and station/route limits."
+      },
+      {
+        label: "BikeFlights e-bike shipping",
+        url: "https://www.bikeflights.com/e-bike-shipping",
+        note: "E-bike ground-service limits, battery requirements, and restrictions on standalone batteries."
+      }
+    ],
+    faqs: [
+      {
+        question: "What is the cheapest way to ship a bike across the country?",
+        answer:
+          "Start with BikeFlights and ShipBikes ground quotes using your final packed box dimensions. Then compare UPS or FedEx direct. For many standard bikes, the bike-specific discounted label is the cheapest practical starting point."
+      },
+      {
+        question: "Is it cheaper to ship a bike or fly with it?",
+        answer:
+          "If you are already flying and the bike fits the airline's checked-bike rules, flying with it can be cheaper than door-to-door shipping. If you need delivery without traveling, a discounted ground bike shipment is usually the better comparison."
+      },
+      {
+        question: "Can I ship a bike with USPS?",
+        answer:
+          "Sometimes, but full-size bike boxes often run into USPS size and dimensional-weight rules. USPS Ground Advantage allows packages up to 70 lb and 130 inches in length plus girth, so measure carefully before assuming it is cheaper."
+      },
+      {
+        question: "What is the cheapest way to ship an e-bike?",
+        answer:
+          "Use a service that explicitly accepts e-bikes by ground, then follow its battery and packing rules. E-bikes are heavier and more restricted than standard bikes, so the cheapest unsafe label is not a real option."
+      }
+    ]
   }
 ];
 
@@ -2554,11 +2738,97 @@ export const guideDetailContent: Record<string, GuideDetailContent> = {
         "Customer acquisition cost and close rate."
       ]
     }
+  },
+  "ship-a-bike": {
+    tools: [
+      {
+        name: "BikeFlights",
+        url: "https://www.bikeflights.com/",
+        bestFor: "Discounted bike-specific carrier labels",
+        useWhen: "You have a packed bike box or case and want a bike-focused quote flow.",
+        watchOut: "Oversize boxes, pickup choices, and protection coverage affect the final price."
+      },
+      {
+        name: "ShipBikes",
+        url: "https://www.shipbikes.com/howmuch.aspx",
+        bestFor: "UPS Ground bike shipping quotes and bike shipping boxes",
+        useWhen: "You want to compare drop-off and door-to-door bike shipping in the contiguous U.S.",
+        watchOut: "Container type, weight limits, declared value, and pickup add-ons change the total."
+      },
+      {
+        name: "FedEx bike shipping guide",
+        url: "https://www.fedex.com/en-us/shipping/how-to-ship-a-bike.html",
+        bestFor: "Direct FedEx quote and packing requirements",
+        useWhen: "You want to compare a carrier-direct option or use FedEx Office supplies.",
+        watchOut: "Professional packing, pickup, box purchase, and dimensional weight can add cost."
+      },
+      {
+        name: "Amtrak bike service",
+        url: "https://www.amtrak.com/bikes",
+        bestFor: "Taking a bicycle on a train trip",
+        useWhen: "Your origin and destination stations support bike or checked baggage service.",
+        watchOut: "Availability varies by route, station, equipment, and reservation type."
+      }
+    ],
+    quoteChecklist: [
+      "Bike type: standard, carbon, e-bike, tandem, fat bike, or kids bike.",
+      "Final packed box length, width, height, length plus girth, and weight.",
+      "Origin and destination ZIP codes, station names, or airports.",
+      "Drop-off versus pickup needs.",
+      "Bike value, proof of value, photos, and protection coverage needs.",
+      "Whether lithium batteries, accessories, tools, or spare parts are inside the box."
+    ],
+    hiddenFees: [
+      "Bike box purchase or reusable case rental.",
+      "Bike shop packing labor and reassembly labor.",
+      "Dimensional-weight charges on large boxes.",
+      "Pickup, residential delivery, signature, and declared-value coverage.",
+      "Carrier corrections for wrong dimensions or weight.",
+      "Airline overweight charges or rejected cases over the bike limit."
+    ],
+    examples: [
+      {
+        title: "Road bike to a buyer",
+        situation: "A standard road bike sold online and packed in a bike shop box.",
+        compare: "BikeFlights, ShipBikes, and one carrier-direct ground quote.",
+        likelyCheapest: "BikeFlights or ShipBikes drop-off ground service.",
+        note: "The cheapest quote depends on final box size, not only distance."
+      },
+      {
+        title: "Bike for a race trip",
+        situation: "You are flying to the same city as the bike.",
+        compare: "Airline checked-bike fee against shipping to the hotel or bike shop.",
+        likelyCheapest: "Airline checked bike if the case fits the airline's rules.",
+        note: "Shipping may still win if timing, handling, or airport logistics matter more."
+      },
+      {
+        title: "Train route with checked baggage",
+        situation: "You and the bike are traveling between Amtrak stations with checked baggage.",
+        compare: "Amtrak boxed bicycle service against a ground carrier label.",
+        likelyCheapest: "Amtrak if the route and stations support it.",
+        note: "Station availability is the make-or-break detail."
+      },
+      {
+        title: "Heavy e-bike",
+        situation: "A battery-assisted bike with a fully installed lithium-ion battery.",
+        compare: "BikeFlights e-bike ground service, local shop help, and any carrier rules for the route.",
+        likelyCheapest: "A compliant ground e-bike service.",
+        note: "Do not try to save money by hiding the battery status."
+      }
+    ],
+    confidence: {
+      label: "Good for choosing what to quote first",
+      note: "Bike shipping prices are highly sensitive to exact box dimensions, route, service level, and battery status. The guide identifies the cheapest starting points and the rules that most often change the winner.",
+      missingData: [
+        "Exact final packed bike dimensions.",
+        "Current live carrier discounts for the route.",
+        "Station, airport, or local bike shop availability."
+      ]
+    }
   }
 };
 
 export const keywordBacklog = [
-  "cheapest way to ship a bike",
   "cheapest way to ship shoes",
   "cheapest way to ship furniture",
   "cheapest way to move out of state",
